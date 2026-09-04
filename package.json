@@ -1,0 +1,17 @@
+{
+  "name": "mesonsoft",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mesonsoft website built with Next.js from the saved WordPress/Elementor pages",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "html-react-parser": "^5.2.2",
+    "next": "^15.5.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  }
+}

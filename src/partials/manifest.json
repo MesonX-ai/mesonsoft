@@ -1,0 +1,283 @@
+{
+  "generatedAt": "2026-09-04T03:25:49.636Z",
+  "defaultTitle": "Mesonsoft – a passion for innovation",
+  "defaultDescription": "Transformative AI for Human Flourishing Empowering lives through innovative AI solutions, delivering simplicity, efficiency, and excellence. We deliver cutting-edge AI solutions that drive digital transformation, foster innovation, and deliver exceptional value to our customers. Get Started Watch video Clients you have 9 reviews. Our AI Software Philosophy Crafting pioneering AI solutions that inspire, empower, and […]",
+  "bodyClasses": [
+    "home",
+    "wp-singular",
+    "page-template",
+    "page-template-templates",
+    "page-template-page-builder-content",
+    "page-template-templatespage-builder-content-php",
+    "page",
+    "page-id-424",
+    "wp-custom-logo",
+    "wp-theme-phlox-pro",
+    "auxin-pro",
+    "elementor-default",
+    "elementor-kit-420",
+    "elementor-page",
+    "elementor-page-424",
+    "phlox-pro",
+    "aux-full-width",
+    "aux-resp",
+    "aux-s-fhd",
+    "aux-page-animation-off",
+    "_auxels"
+  ],
+  "cssLinks": [
+    "/assets/news.css",
+    "/assets/styles.css",
+    "/assets/wp-ulike.min.css",
+    "/assets/base.css",
+    "/assets/auxin-icon.css",
+    "/assets/main.css",
+    "/assets/custom.css",
+    "/assets/go-pricing.css",
+    "/assets/portfolio.css",
+    "/assets/elementor.css",
+    "/assets/frontend.min.css",
+    "/assets/post-421.css",
+    "/assets/post-419.css",
+    "/assets/widget-social-icons.min.css",
+    "/assets/apple-webkit.min.css",
+    "/assets/elementor-icons.min.css",
+    "/assets/post-420.css",
+    "/assets/elementor-widgets.css",
+    "/assets/mediaelementplayer-legacy.min.css",
+    "/assets/wp-mediaelement.min.css",
+    "/assets/widget-icon-list.min.css",
+    "/assets/post-424.css",
+    "/assets/css",
+    "/assets/css2",
+    "/assets/css(1)",
+    "/assets/css(2)",
+    "/assets/quicksand.css",
+    "/assets/roboto.css",
+    "/assets/robotoslab.css",
+    "/assets/fontawesome.min.css",
+    "/assets/brands.min.css",
+    "/assets/post-423.css",
+    "/assets/nunito.css",
+    "/assets/post-422.css"
+  ],
+  "scripts": [
+    {
+      "type": "src",
+      "src": "/assets/jquery.min.js"
+    },
+    {
+      "type": "src",
+      "src": "/assets/jquery-migrate.min.js"
+    },
+    {
+      "type": "src",
+      "src": "/assets/widgets.js"
+    },
+    {
+      "type": "inline",
+      "id": "auxin-modernizr-js-extra",
+      "content": "\nvar auxin = {\"ajax_url\":\"https://www.mesonsoft.com/wp-admin/admin-ajax.php\",\"is_rtl\":\"\",\"is_reponsive\":\"1\",\"is_framed\":\"\",\"frame_width\":\"20\",\"wpml_lang\":\"en\",\"uploadbaseurl\":\"https://www.mesonsoft.com/wp-content/uploads\",\"nonce\":\"ea4b1461ca\"};\n//# sourceURL=auxin-modernizr-js-extra\n"
+    },
+    {
+      "type": "inline",
+      "id": "auxin-modernizr-js-before",
+      "content": "\n/* < ![CDATA[ */\nfunction auxinNS(n){for(var e=n.split(\".\"),a=window,i=\"\",r=e.length,t=0;r>t;t++)\"window\"!=e[t]&&(i=e[t],a[i]=a[i]||{},a=a[i]);return a;}\n/* ]]> */\n//# sourceURL=auxin-modernizr-js-before\n"
+    },
+    {
+      "type": "src",
+      "src": "/assets/modernizr-custom.min.js"
+    },
+    {
+      "type": "inline",
+      "content": "\n\t\t\t\t( () => {\n\t\t\t\t\tconst lazyloadRunObserver = () => {\n\t\t\t\t\t\tconst lazyloadBackgrounds = document.querySelectorAll( `.e-con.e-parent:not(.e-lazyloaded)` );\n\t\t\t\t\t\tconst lazyloadBackgroundObserver = new IntersectionObserver( ( entries ) => {\n\t\t\t\t\t\t\tentries.forEach( ( entry ) => {\n\t\t\t\t\t\t\t\tif ( entry.isIntersecting ) {\n\t\t\t\t\t\t\t\t\tlet lazyloadBackground = entry.target;\n\t\t\t\t\t\t\t\t\tif( lazyloadBackground ) {\n\t\t\t\t\t\t\t\t\t\tlazyloadBackground.classList.add( 'e-lazyloaded' );\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\tlazyloadBackgroundObserver.unobserve( entry.target );\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t});\n\t\t\t\t\t\t}, { rootMargin: '200px 0px 200px 0px' } );\n\t\t\t\t\t\tlazyloadBackgrounds.forEach( ( lazyloadBackground ) => {\n\t\t\t\t\t\t\tlazyloadBackgroundObserver.observe( lazyloadBackground );\n\t\t\t\t\t\t} );\n\t\t\t\t\t};\n\t\t\t\t\tconst events = [\n\t\t\t\t\t\t'DOMContentLoaded',\n\t\t\t\t\t\t'elementor/lazyload/observe',\n\t\t\t\t\t];\n\t\t\t\t\tevents.forEach( ( event ) => {\n\t\t\t\t\t\tdocument.addEventListener( event, lazyloadRunObserver );\n\t\t\t\t\t} );\n\t\t\t\t} )();\n\t\t\t"
+    },
+    {
+      "type": "src",
+      "src": "/assets/imagesloaded.min.js"
+    },
+    {
+      "type": "src",
+      "src": "/assets/masonry.min.js"
+    },
+    {
+      "type": "src",
+      "src": "/assets/select2.full.js"
+    },
+    {
+      "type": "src",
+      "src": "/assets/perfect-scrollbar.js"
+    },
+    {
+      "type": "src",
+      "src": "/assets/plugins.min.js"
+    },
+    {
+      "type": "src",
+      "src": "/assets/scripts.min.js"
+    },
+    {
+      "type": "src",
+      "src": "/assets/widgets(1).js"
+    },
+    {
+      "type": "inline",
+      "id": "mediaelement-core-js-before",
+      "content": "\nvar mejsL10n = {\"language\":\"en\",\"strings\":{\"mejs.download-file\":\"Download File\",\"mejs.install-flash\":\"You are using a browser that does not have Flash player enabled or installed. Please turn on your Flash player plugin or download the latest version from https://get.adobe.com/flashplayer/\",\"mejs.fullscreen\":\"Fullscreen\",\"mejs.play\":\"Play\",\"mejs.pause\":\"Pause\",\"mejs.time-slider\":\"Time Slider\",\"mejs.time-help-text\":\"Use Left/Right Arrow keys to advance one second, Up/Down arrows to advance ten seconds.\",\"mejs.live-broadcast\":\"Live Broadcast\",\"mejs.volume-help-text\":\"Use Up/Down Arrow keys to increase or decrease volume.\",\"mejs.unmute\":\"Unmute\",\"mejs.mute\":\"Mute\",\"mejs.volume-slider\":\"Volume Slider\",\"mejs.video-player\":\"Video Player\",\"mejs.audio-player\":\"Audio Player\",\"mejs.captions-subtitles\":\"Captions/Subtitles\",\"mejs.captions-chapters\":\"Chapters\",\"mejs.none\":\"None\",\"mejs.afrikaans\":\"Afrikaans\",\"mejs.albanian\":\"Albanian\",\"mejs.arabic\":\"Arabic\",\"mejs.belarusian\":\"Belarusian\",\"mejs.bulgarian\":\"Bulgarian\",\"mejs.catalan\":\"Catalan\",\"mejs.chinese\":\"Chinese\",\"mejs.chinese-simplified\":\"Chinese (Simplified)\",\"mejs.chinese-traditional\":\"Chinese (Traditional)\",\"mejs.croatian\":\"Croatian\",\"mejs.czech\":\"Czech\",\"mejs.danish\":\"Danish\",\"mejs.dutch\":\"Dutch\",\"mejs.english\":\"English\",\"mejs.estonian\":\"Estonian\",\"mejs.filipino\":\"Filipino\",\"mejs.finnish\":\"Finnish\",\"mejs.french\":\"French\",\"mejs.galician\":\"Galician\",\"mejs.german\":\"German\",\"mejs.greek\":\"Greek\",\"mejs.haitian-creole\":\"Haitian Creole\",\"mejs.hebrew\":\"Hebrew\",\"mejs.hindi\":\"Hindi\",\"mejs.hungarian\":\"Hungarian\",\"mejs.icelandic\":\"Icelandic\",\"mejs.indonesian\":\"Indonesian\",\"mejs.irish\":\"Irish\",\"mejs.italian\":\"Italian\",\"mejs.japanese\":\"Japanese\",\"mejs.korean\":\"Korean\",\"mejs.latvian\":\"Latvian\",\"mejs.lithuanian\":\"Lithuanian\",\"mejs.macedonian\":\"Macedonian\",\"mejs.malay\":\"Malay\",\"mejs.maltese\":\"Maltese\",\"mejs.norwegian\":\"Norwegian\",\"mejs.persian\":\"Persian\",\"mejs.polish\":\"Polish\",\"mejs.portuguese\":\"Portuguese\",\"mejs.romanian\":\"Romanian\",\"mejs.russian\":\"Russian\",\"mejs.serbian\":\"Serbian\",\"mejs.slovak\":\"Slovak\",\"mejs.slovenian\":\"Slovenian\",\"mejs.spanish\":\"Spanish\",\"mejs.swahili\":\"Swahili\",\"mejs.swedish\":\"Swedish\",\"mejs.tagalog\":\"Tagalog\",\"mejs.thai\":\"Thai\",\"mejs.turkish\":\"Turkish\",\"mejs.ukrainian\":\"Ukrainian\",\"mejs.vietnamese\":\"Vietnamese\",\"mejs.welsh\":\"Welsh\",\"mejs.yiddish\":\"Yiddish\"}};\n//# sourceURL=mediaelement-core-js-before\n"
+    },
+    {
+      "type": "src",
+      "src": "/assets/mediaelement-and-player.min.js"
+    },
+    {
+      "type": "src",
+      "src": "/assets/mediaelement-migrate.min.js"
+    },
+    {
+      "type": "inline",
+      "id": "mediaelement-js-extra",
+      "content": "\nvar _wpmejsSettings = {\"pluginPath\":\"/wp-includes/js/mediaelement/\",\"classPrefix\":\"mejs-\",\"stretching\":\"auto\",\"audioShortcodeLibrary\":\"mediaelement\",\"videoShortcodeLibrary\":\"mediaelement\"};\n//# sourceURL=mediaelement-js-extra\n"
+    },
+    {
+      "type": "src",
+      "src": "/assets/wp-mediaelement.min.js"
+    },
+    {
+      "type": "src",
+      "src": "/assets/plugins(1).min.js"
+    },
+    {
+      "type": "src",
+      "src": "/assets/scripts.js"
+    },
+    {
+      "type": "src",
+      "src": "/assets/jquery-numerator.min.js"
+    },
+    {
+      "type": "src",
+      "src": "/assets/pro-tools.js"
+    },
+    {
+      "type": "inline",
+      "id": "auxin-news-main-js-extra",
+      "content": "\nvar auxnew = {\"ajax_url\":\"https://www.mesonsoft.com/wp-admin/admin-ajax.php\"};\n//# sourceURL=auxin-news-main-js-extra\n"
+    },
+    {
+      "type": "src",
+      "src": "/assets/news.js"
+    },
+    {
+      "type": "inline",
+      "id": "auxin-portfolio-portfolio-js-extra",
+      "content": "\nvar auxpfo = {\"ajax_url\":\"https://www.mesonsoft.com/wp-admin/admin-ajax.php\",\"invalid_required\":\"This is a required field\",\"invalid_postcode\":\"Zipcode must be digits\",\"invalid_phonenum\":\"Enter a valid phone number\",\"invalid_emailadd\":\"Enter a valid email address\"};\n//# sourceURL=auxin-portfolio-portfolio-js-extra\n"
+    },
+    {
+      "type": "src",
+      "src": "/assets/portfolio.js"
+    },
+    {
+      "type": "src",
+      "src": "/assets/hooks.min.js"
+    },
+    {
+      "type": "src",
+      "src": "/assets/i18n.min.js"
+    },
+    {
+      "type": "inline",
+      "id": "wp-i18n-js-after",
+      "content": "\nwp.i18n.setLocaleData( { 'text direction\\u0004ltr': [ 'ltr' ] } );\n//# sourceURL=wp-i18n-js-after\n"
+    },
+    {
+      "type": "src",
+      "src": "/assets/index.js"
+    },
+    {
+      "type": "inline",
+      "id": "contact-form-7-js-before",
+      "content": "\nvar wpcf7 = {\n    \"api\": {\n        \"root\": \"https:\\/\\/www.mesonsoft.com\\/index.php?rest_route=\\/\",\n        \"namespace\": \"contact-form-7\\/v1\"\n    }\n};\n//# sourceURL=contact-form-7-js-before\n"
+    },
+    {
+      "type": "src",
+      "src": "/assets/index(1).js"
+    },
+    {
+      "type": "inline",
+      "id": "wp_ulike-js-before",
+      "content": "\nvar wp_ulike_params = {\"ajax_url\":\"https:\\/\\/www.mesonsoft.com\\/wp-admin\\/admin-ajax.php\",\"notifications\":true,\"ajax_error\":\"Could not save your vote. Please refresh the page and try again.\"};\n//# sourceURL=wp_ulike-js-before\n"
+    },
+    {
+      "type": "src",
+      "src": "/assets/wp-ulike.min.js"
+    },
+    {
+      "type": "src",
+      "src": "/assets/custom.js"
+    },
+    {
+      "type": "src",
+      "src": "/assets/webpack.runtime.min.js"
+    },
+    {
+      "type": "src",
+      "src": "/assets/frontend-modules.min.js"
+    },
+    {
+      "type": "inline",
+      "id": "jquery-ui-core-js-before",
+      "content": "\njQuery.uiBackCompat = true;\n//# sourceURL=jquery-ui-core-js-before\n"
+    },
+    {
+      "type": "src",
+      "src": "/assets/core.min.js"
+    },
+    {
+      "type": "inline",
+      "id": "elementor-frontend-js-before",
+      "content": "\nvar elementorFrontendConfig = {\"environmentMode\":{\"edit\":false,\"wpPreview\":false,\"isScriptDebug\":false},\"i18n\":{\"shareOnFacebook\":\"Share on Facebook\",\"shareOnX\":\"Share on X\",\"pinIt\":\"Pin it\",\"download\":\"Download\",\"downloadImage\":\"Download image\",\"fullscreen\":\"Fullscreen\",\"zoom\":\"Zoom\",\"share\":\"Share\",\"playVideo\":\"Play Video\",\"previous\":\"Previous\",\"next\":\"Next\",\"close\":\"Close\",\"a11yCarouselPrevSlideMessage\":\"Previous slide\",\"a11yCarouselNextSlideMessage\":\"Next slide\",\"a11yCarouselFirstSlideMessage\":\"This is the first slide\",\"a11yCarouselLastSlideMessage\":\"This is the last slide\",\"a11yCarouselPaginationBulletMessage\":\"Go to slide\"},\"is_rtl\":false,\"breakpoints\":{\"xs\":0,\"sm\":480,\"md\":768,\"lg\":1025,\"xl\":1440,\"xxl\":1600},\"responsive\":{\"breakpoints\":{\"mobile\":{\"label\":\"Mobile Portrait\",\"value\":767,\"default_value\":767,\"direction\":\"max\",\"is_enabled\":true},\"mobile_extra\":{\"label\":\"Mobile Landscape\",\"value\":880,\"default_value\":880,\"direction\":\"max\",\"is_enabled\":false},\"tablet\":{\"label\":\"Tablet Portrait\",\"value\":1024,\"default_value\":1024,\"direction\":\"max\",\"is_enabled\":true},\"tablet_extra\":{\"label\":\"Tablet Landscape\",\"value\":1200,\"default_value\":1200,\"direction\":\"max\",\"is_enabled\":false},\"laptop\":{\"label\":\"Laptop\",\"value\":1366,\"default_value\":1366,\"direction\":\"max\",\"is_enabled\":false},\"widescreen\":{\"label\":\"Widescreen\",\"value\":2400,\"default_value\":2400,\"direction\":\"min\",\"is_enabled\":false}},\n\"hasCustomBreakpoints\":false},\"version\":\"4.2.4\",\"is_static\":false,\"experimentalFeatures\":{\"additional_custom_breakpoints\":true,\"container\":true,\"e_optimized_markup\":true,\"e_panel_promotions\":true,\"nested-elements\":true,\"global_classes_should_enforce_capabilities\":true,\"e_variables\":true,\"e_opt_in_v4_page\":true,\"e_components\":true,\"e_interactions\":true,\"e_widget_creation\":true,\"import-export-customization\":true},\"urls\":{\"assets\":\"https:\\/\\/www.mesonsoft.com\\/wp-content\\/plugins\\/elementor\\/assets\\/\",\"ajaxurl\":\"https:\\/\\/www.mesonsoft.com\\/wp-admin\\/admin-ajax.php\",\"uploadUrl\":\"https:\\/\\/www.mesonsoft.com\\/wp-content\\/uploads\"},\"nonces\":{\"floatingButtonsClickTracking\":\"68c1336985\",\"atomicFormsSendForm\":\"0e9f1f68a6\"},\"swiperClass\":\"swiper\",\"settings\":{\"page\":[],\"editorPreferences\":[]},\"kit\":{\"active_breakpoints\":[\"viewport_mobile\",\"viewport_tablet\"],\"global_image_lightbox\":\"yes\",\"lightbox_enable_counter\":\"yes\",\"lightbox_enable_fullscreen\":\"yes\",\"lightbox_enable_zoom\":\"yes\",\"lightbox_enable_share\":\"yes\",\"lightbox_title_src\":\"title\",\"lightbox_description_src\":\"description\"},\"post\":{\"id\":424,\"title\":\"Mesonsoft%20%E2%80%93%20a%20passion%20for%20innovation\",\"excerpt\":\"\",\"featuredImage\":false}};\n//# sourceURL=elementor-frontend-js-before\n"
+    },
+    {
+      "type": "src",
+      "src": "/assets/frontend.min.js"
+    },
+    {
+      "type": "src",
+      "src": "/assets/vt"
+    },
+    {
+      "type": "inline",
+      "content": "\n            jQuery( function($) {\n                if(typeof GMaps != \"function\" || typeof google === \"undefined\"){\n                    console.info( \"Please add google map API key in theme options. https://developers.google.com/maps/documentation/javascript/\" );\n                    return;\n                }\n                var map = new GMaps({\n                    el: \"#aux-map6a99f94e943c1\",\n                    lat:  38.96114784828,\n                    lng:  -77.527260661778,\n                    zoom: 12.3,\n                    scrollwheel: 0,\n                                        mapTypeId: google.maps.MapTypeId.ROADMAP,\n                                        panControl : true\n                });\n\n                                map.addStyle({\n                    styledMapName:\"Auxin custom style map\",\n                    styles: [ { \"featureType\": \"all\", \"elementType\": \"labels.text.fill\", \"stylers\": [ { \"saturation\": 36 }, { \"color\": \"#333333\" }, { \"lightness\": 40 } ] }, { \"featureType\": \"all\", \"elementType\": \"labels.text.stroke\", \"stylers\": [ { \"visibility\": \"on\" }, { \"color\": \"#ffffff\" }, { \"lightness\": 16 } ] }, { \"featureType\": \"all\", \"elementType\": \"labels.icon\", \"stylers\": [ { \"visibility\": \"off\" } ] }, { \"featureType\": \"administrative\", \"elementType\": \"geometry.fill\", \"stylers\": [ { \"color\": \"#f3f5f8\" }, { \"lightness\": 20 } ] }, { \"featureType\": \"administrative\", \"elementType\": \"geometry.stroke\", \"stylers\": [ { \"color\": \"#fefefe\" }, { \"lightness\": 17 }, { \"weight\": 1.2 } ] }, { \"featureType\": \"landscape\", \"elementType\": \"geometry\", \"stylers\": [ { \"color\": \"#f3f5f8\" }, { \"lightness\": 20 } ] }, { \"featureType\": \"poi\", \"elementType\": \"geometry\", \"stylers\": [ { \"color\": \"#ffffff\" }, { \"lightness\": 21 } ] }, { \"featureType\": \"poi.park\", \"elementType\": \"geometry\", \"stylers\": [ { \"color\": \"#f3f5f8\" }, { \"lightness\": 21 } ] }, { \"featureType\": \"road.highway\", \"elementType\": \"geometry.fill\", \"stylers\": [ { \"color\": \"#ffffff\" }, { \"lightness\": 17 } ] }, { \"featureType\": \"road.highway\", \"elementType\": \"geometry.stroke\", \"stylers\": [ { \"color\": \"#ffffff\" }, { \"lightness\": 29 }, { \"weight\": 0.2 } ] }, { \"featureType\": \"road.arterial\", \"elementType\": \"geometry\", \"stylers\": [ { \"color\": \"#ffffff\" }, { \"lightness\": 18 } ] }, { \"featureType\": \"road.local\", \"elementType\": \"geometry\", \"stylers\": [ { \"color\": \"#ffffff\" }, { \"lightness\": 16 } ] }, { \"featureType\": \"transit\", \"elementType\": \"geometry\", \"stylers\": [ { \"color\": \"#f3f5f8\" }, { \"lightness\": 19 } ] }, { \"featureType\": \"water\", \"elementType\": \"geometry\", \"stylers\": [ { \"color\": \"#ffffff\" }, { \"lightness\": 17 } ] } ],\n                    mapTypeId: \"aux_map_style\"\n                });\n\n                map.setStyle(\"aux_map_style\");\n                                map.addMarker({\n                                        lat : 38.96114784828,\n                    lng : -77.527260661778,\n                                            icon: \"https://www.mesonsoft.com/wp-content/uploads/2025/06/ms_marker.png\"\n                    \n                });\n           });\n\n        "
+    }
+  ],
+  "icons": [
+    {
+      "rel": "icon",
+      "href": "/assets/remote/wp-content/uploads/2024/12/cropped-ms_icon-32x32.png",
+      "sizes": "32x32"
+    },
+    {
+      "rel": "icon",
+      "href": "/assets/remote/wp-content/uploads/2024/12/cropped-ms_icon-192x192.png",
+      "sizes": "192x192"
+    },
+    {
+      "rel": "apple-touch-icon",
+      "href": "/assets/remote/wp-content/uploads/2024/12/cropped-ms_icon-180x180.png"
+    }
+  ],
+  "pages": {
+    "home": {
+      "title": "Mesonsoft – a passion for innovation",
+      "description": "Transformative AI for Human Flourishing Empowering lives through innovative AI solutions, delivering simplicity, efficiency, and excellence. We deliver cutting-edge AI solutions that drive digital transformation, foster innovation, and deliver exceptional value to our customers. Get Started Watch video Clients you have 9 reviews. Our AI Software Philosophy Crafting pioneering AI solutions that inspire, empower, and […]"
+    },
+    "about": {
+      "title": "About – Mesonsoft",
+      "description": "About Us Who we are At Mesonsoft, we’re passionate about harnessing the power of artificial intelligence to drive business transformation and improve lives. Our story began with a simple yet ambitious vision: to create innovative AI solutions that empower organizations to thrive in a rapidly evolving world. Shiva R Dhanuskodi Get Started Our Mission Delivering […]"
+    },
+    "contact": {
+      "title": "Contact – Mesonsoft",
+      "description": "Contact With Us Redefining What is Possible Your email address will not be published. Required fields are marked* Our Phone +1 (703) 880-2682 Find Us 23692 Richland Grove Dr., Brambleton, VA 20148 Our Email info@mesonsoftcom sales@mesonsoft.com"
+    }
+  }
+}
