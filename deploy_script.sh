@@ -252,17 +252,24 @@ PY
 fi
 [[ -n "$FTP_HOST" && -n "$FTP_USER" && -n "$FTP_PASS" ]] || fail "Incomplete FTP credentials (host/user/pass)."
 
-# 3b. Resolve the EXISTING /public_html/mesonx folder on the server. We NEVER
-#     create it: cd into it and abort if it does not exist.
+# 3b. Resolve the EXISTING mesonx folder on the server. We NEVER create it:
+#     cd into each candidate and abort if none exists. NOTE: the FTP account's
+#     root is ALREADY /public_html after login, so the folder is reached as
+#     "mesonx" relative to the FTP root; "/public_html/mesonx" is tried as a
+#     fallback for accounts whose FTP root is the account home instead.
 OUT_DIR="$PROJECT_DIR/out"
 REMOTE_MANIFEST_NAME="mesonsoft-deploy-manifest.sha256"
-REMOTE_BASE="/public_html/mesonx"
-if ! lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" -p "$FTP_PORT" \
-    -e "set ftp:passive-mode on; set ssl:verify-certificate no; set cmd:fail-exit on; cd $REMOTE_BASE; quit" \
-    >/dev/null 2>&1; then
-  fail "$REMOTE_BASE does not exist on $FTP_HOST. This deploy only targets the EXISTING folder — create public_html/mesonx in cPanel/FTP first, then re-run."
-fi
-ok "Remote target exists: $REMOTE_BASE (never created by this script)."
+REMOTE_BASE=""
+for cand in mesonx /public_html/mesonx; do
+  if lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" -p "$FTP_PORT" \
+      -e "set ftp:passive-mode on; set ssl:verify-certificate no; set cmd:fail-exit on; cd $cand; quit" \
+      >/dev/null 2>&1; then
+    REMOTE_BASE="$cand"
+    break
+  fi
+done
+[[ -n "$REMOTE_BASE" ]] || fail "Neither 'mesonx' (relative to the FTP root, which is already /public_html) nor '/public_html/mesonx' exists on $FTP_HOST. This deploy only targets the EXISTING folder — create mesonx inside public_html in cPanel/FTP first, then re-run."
+ok "Remote target exists: $REMOTE_BASE (FTP root is already /public_html; never created by this script)."
 
 # 3c. Checksums + diff
 CACHE_DIR="$PROJECT_DIR/.deploy"
