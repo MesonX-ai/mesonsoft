@@ -11,11 +11,12 @@
 #      copy of the manifest also stored on the server as
 #      mesonsoft-deploy-manifest.sha256 so a fresh clone can still diff).
 #
-#   IMPORTANT — the upload target is the EXISTING /public_html/mesonx folder
-#   on the hosting server. This script NEVER creates public_html or mesonx:
-#   it cd's into the folder first and aborts if it is missing. Only
-#   sub-folders INSIDE mesonx (e.g. new _next/ asset dirs) get created while
-#   uploading.
+#   IMPORTANT — the upload target is the FTP ROOT folder itself, which on this
+#   GoDaddy account is ALREADY /public_html (verified: login lands in
+#   public_html and /mesonx etc. are visible at the top level). This script
+#   deploys straight into that root — it NEVER creates the root or any folder
+#   outside it; only sub-folders INSIDE the root (e.g. new _next/ asset dirs)
+#   get created while uploading.
 #
 # Usage:
 #   ./deploy_script.sh                  # commit + push + build + upload
@@ -252,24 +253,19 @@ PY
 fi
 [[ -n "$FTP_HOST" && -n "$FTP_USER" && -n "$FTP_PASS" ]] || fail "Incomplete FTP credentials (host/user/pass)."
 
-# 3b. Resolve the EXISTING mesonx folder on the server. We NEVER create it:
-#     cd into each candidate and abort if none exists. NOTE: the FTP account's
-#     root is ALREADY /public_html after login, so the folder is reached as
-#     "mesonx" relative to the FTP root; "/public_html/mesonx" is tried as a
-#     fallback for accounts whose FTP root is the account home instead.
+# 3b. Resolve the upload target: the FTP ROOT folder itself. On this GoDaddy
+#     account the FTP root IS /public_html after login (verified live), so we
+#     deploy directly into it. We NEVER create anything here — just verify the
+#     login + listing works, and abort otherwise.
 OUT_DIR="$PROJECT_DIR/out"
 REMOTE_MANIFEST_NAME="mesonsoft-deploy-manifest.sha256"
-REMOTE_BASE=""
-for cand in mesonx /public_html/mesonx; do
-  if lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" -p "$FTP_PORT" \
-      -e "set ftp:passive-mode on; set ssl:verify-certificate no; set cmd:fail-exit on; cd $cand; quit" \
-      >/dev/null 2>&1; then
-    REMOTE_BASE="$cand"
-    break
-  fi
-done
-[[ -n "$REMOTE_BASE" ]] || fail "Neither 'mesonx' (relative to the FTP root, which is already /public_html) nor '/public_html/mesonx' exists on $FTP_HOST. This deploy only targets the EXISTING folder — create mesonx inside public_html in cPanel/FTP first, then re-run."
-ok "Remote target exists: $REMOTE_BASE (FTP root is already /public_html; never created by this script)."
+REMOTE_BASE="."
+if ! lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" -p "$FTP_PORT" \
+    -e "set ftp:passive-mode on; set ssl:verify-certificate no; set cmd:fail-exit on; cd $REMOTE_BASE; cls; quit" \
+    >/dev/null 2>&1; then
+  fail "Could not list the FTP root on $FTP_HOST (login failed or root not accessible). The FTP root is expected to be the existing /public_html — nothing is ever created outside it."
+fi
+ok "Remote target: FTP root = /public_html (deploying directly into it; never created by this script)."
 
 # 3c. Checksums + diff
 CACHE_DIR="$PROJECT_DIR/.deploy"
@@ -338,7 +334,7 @@ cp "$LOCAL_MANIFEST" "$CACHE_MANIFEST"
 ok "Uploaded $changed_count file(s). Checksum manifest updated ($CACHE_MANIFEST)."
 
 # ------------------------------------------------- post-deploy smoke test ----
-SITE_URL="${SITE_URL:-https://mesonsoft.com/mesonx/}"
+SITE_URL="${SITE_URL:-https://mesonsoft.com/}"
 log "Post-deploy smoke test: $SITE_URL"
 CODE="$(curl -s -o /dev/null -w '%{http_code}' -L --max-time 15 "$SITE_URL" || true)"
 case "$CODE" in
