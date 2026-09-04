@@ -17,9 +17,12 @@ export const metadata = {
   title: manifest.defaultTitle,
   description: manifest.defaultDescription,
   icons: {
-    icon: manifest.icons
-      .filter((i) => /icon/i.test(i.rel) && !/apple/.test(i.rel))
-      .map((i) => ({ url: i.href, sizes: i.sizes, type: i.href.endsWith('.png') ? 'image/png' : undefined })),
+    icon: [
+      { url: '/favicon.ico' },
+      ...manifest.icons
+        .filter((i) => /icon/i.test(i.rel) && !/apple/.test(i.rel))
+        .map((i) => ({ url: i.href, sizes: i.sizes, type: i.href.endsWith('.png') ? 'image/png' : undefined })),
+    ],
     apple: manifest.icons
       .filter((i) => /apple/.test(i.rel))
       .map((i) => i.href),

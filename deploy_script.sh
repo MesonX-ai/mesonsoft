@@ -316,18 +316,50 @@ cp "$LOCAL_MANIFEST" "$DELTA_DIR/$REMOTE_MANIFEST_NAME"
 
 # Upload the delta. lftp mirror -R may create sub-folders INSIDE $REMOTE_BASE
 # (e.g. _next/…) but never the base folder itself — we are already inside it.
+# cmd:fail-exit is REQUIRED: without it lftp exits 0 even when mirror -R
+# failed partway (observed on GoDaddy: files silently skipped), which would
+# make the script record a false "deployed" manifest.
 if ! lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" -p "$FTP_PORT" <<EOF
 set ftp:passive-mode on
 set ssl:verify-certificate no
-set net:max-retries 3
+set cmd:fail-exit on
+set net:max-retries 5
+set net:timeout 30
 set net:reconnect-interval-base 5
+set net:reconnect-interval-max 60
 cd $REMOTE_BASE
 mirror -R --verbose "$DELTA_DIR" .
 quit
 EOF
 then
-  fail "FTP upload failed. The checksum manifest was NOT updated (unchanged files were not re-sent); failures retry next run."
+  fail "FTP upload FAILED. The checksum manifest was NOT updated (unchanged files were not re-sent); failures retry next run."
 fi
+
+# Post-upload verification: dry-run the same delta again. If anything would
+# still transfer, the upload was incomplete — abort WITHOUT updating the
+# checksum manifest so the next run retries the missing files.
+log "Verifying upload completeness (dry-run re-compare)..."
+VERIFICATION_OUT="$(mktemp)"
+trap 'rm -rf "$TMP_DIR" "$VERIFICATION_OUT"' EXIT
+if ! lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" -p "$FTP_PORT" <<EOF | tee "$VERIFICATION_OUT"
+set ftp:passive-mode on
+set ssl:verify-certificate no
+set cmd:fail-exit on
+set net:max-retries 3
+cd $REMOTE_BASE
+mirror -R --dry-run --verbose "$DELTA_DIR" .
+quit
+EOF
+then
+  fail "Upload verification session failed. Manifest NOT updated; missing files will retry next run."
+fi
+if grep -qE '^(New: [1-9][0-9]* files|Transferring file)' "$VERIFICATION_OUT"; then
+  echo "Files still missing after upload:" >&2
+  grep -E '^Transferring file' "$VERIFICATION_OUT" | head -20 >&2
+  grep -E '^New:' "$VERIFICATION_OUT" >&2
+  fail "Upload incomplete (see list above). Manifest NOT updated — re-run this script to retry the missing files."
+fi
+ok "Upload verified complete on the server."
 
 # Only record the deployment once every file uploaded.
 cp "$LOCAL_MANIFEST" "$CACHE_MANIFEST"
