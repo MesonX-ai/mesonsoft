@@ -282,6 +282,14 @@
     "contact": {
       "title": "Contact – Mesonsoft",
       "description": "Contact With Us Redefining What is Possible Your email address will not be published. Required fields are marked* Our Phone +1 (703) 880-2682 Find Us 23692 Richland Grove Dr., Brambleton, VA 20148 Our Email info@mesonsoftcom sales@mesonsoft.com"
+    },
+    "terms": {
+      "title": "Terms of Use – Mesonsoft",
+      "description": "Terms of Use Effective date: September 5, 2026. These Terms govern your access to and use of mesonsoft.com and the agentic AI solutions, LLM integrations, and related services provided by Mesonsoft LLC. […]"
+    },
+    "privacy": {
+      "title": "Privacy Policy – Mesonsoft",
+      "description": "Privacy Policy Effective date: September 5, 2026. This Policy explains how Mesonsoft LLC collects, uses, discloses, and protects personal information across our websites, products, and AI services. […]"
     }
   }
 }
