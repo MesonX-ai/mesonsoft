@@ -72,6 +72,10 @@
     },
     {
       "type": "src",
+      "src": "/assets/mesonsoft-cards.js"
+    },
+    {
+      "type": "src",
       "src": "/assets/widgets.js"
     },
     {
