@@ -2,49 +2,64 @@
  * Mesonsoft — scroll-reveal transitions for the cards in the
  * "Commitment to Excellence" section (home page).
  *
- * The cards transition IN as the user scrolls TO the section and
- * transition OUT as they scroll AWAY from it. This script toggles
- * `.meso-in-view` on the `.meso-scroll-reveal` section while the
- * CSS in inline-head.css handles the actual fading/rising.
+ * The cards fade in and move up when scrolled into view, and fade out
+ * and move down when scrolled out of view. This matches the behavior
+ * of the Innovative AI Solutions cards (which use the original Auxin
+ * appear animations).
  *
- * It is gated on `html.meso-js` (added below) so the styles only
- * hide the cards when JS actually ran — without JS (or without
- * IntersectionObserver) the cards simply stay visible.
+ * Uses the Auxin `appearl` plugin which fires "appear" and "disappear"
+ * events based on viewport visibility.
+ */
+/**
+ * Mesonsoft — scroll-reveal transitions for the cards in the
+ * "Commitment to Excellence" section (home page).
+ *
+ * The cards fade in and move up when scrolled into view, and fade out
+ * and move down when scrolled out of view. This matches the entrance
+ * animation style of the Innovative AI Solutions cards (which use the
+ * original Auxin `aux-appear-watch-animation` animations).
+ *
+ * Uses IntersectionObserver to toggle the `aux-animated` /
+ * `aux-animated-once` classes that trigger the Auxin entrance
+ * animations.
  */
 (function () {
   'use strict';
 
   function init() {
-    var section = document.querySelector('.meso-scroll-reveal');
-    if (!section) return;
-
-    var cards = section.querySelectorAll(
+    var cards = document.querySelectorAll(
       '.elementor-element-2c2fab3, .elementor-element-30943bd, .elementor-element-29c391f'
     );
     if (!cards.length) return;
 
-    // Signal that JS is running so the reveal CSS becomes active.
-    document.documentElement.classList.add('meso-js');
-
-    function setInView(inView) {
-      section.classList.toggle('meso-in-view', !!inView);
+    function setInView(card, inView) {
+      if (inView) {
+        card.classList.add('aux-animated');
+        card.classList.add('aux-animated-once');
+      } else {
+        card.classList.remove('aux-animated');
+        card.classList.remove('aux-animated-once');
+      }
     }
 
     if ('IntersectionObserver' in window) {
-      // +200px root margin below the viewport lets the cards begin their
-      // transition a moment before the section actually scrolls on screen.
       var observer = new IntersectionObserver(
         function (entries) {
           for (var i = 0; i < entries.length; i++) {
-            setInView(entries[i].isIntersecting);
+            setInView(entries[i].target, entries[i].isIntersecting);
           }
         },
         { rootMargin: '0px 0px 200px 0px', threshold: 0 }
       );
-      observer.observe(section);
+
+      for (var i = 0; i < cards.length; i++) {
+        observer.observe(cards[i]);
+      }
     } else {
-      // No IntersectionObserver support: keep the cards visible.
-      setInView(true);
+      // No IntersectionObserver: keep cards visible
+      for (var i = 0; i < cards.length; i++) {
+        setInView(cards[i], true);
+      }
     }
   }
 
@@ -54,3 +69,4 @@
     init();
   }
 })();
+
