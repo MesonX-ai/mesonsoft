@@ -34,15 +34,26 @@
             <div class="aux-widget-inner"><h2 class="aux-modern-heading-primary">Transformative AI for Human Flourishing</h2><div class="aux-modern-heading-description"><p>Empowering lives through innovative AI solutions, delivering simplicity, efficiency, and excellence. We deliver cutting-edge AI solutions that drive digital transformation, foster innovation, and deliver exceptional value to our customers.</p></div></div>
         </section>				</div>
 				<div class="elementor-element elementor-element-08e56e1 elementor-widget__width-auto aux-appear-watch-animation aux-fade-in-right-1 elementor-widget elementor-widget-aux_modern_button aux-animated aux-animated-once" data-id="08e56e1" data-element_type="widget" data-e-type="widget" data-widget_type="aux_modern_button.default">
-					    <div class="aux-modern-button-wrapper aux-modern-button-align-left">
-                    <a class="aux-modern-button aux-black aux-modern-button-md aux-modern-button-normal aux-modern-button-default aux-icon-" href="/contact">
-                <div class="aux-overlay"></div>
-                                    <div class="aux-icon ">
-                                            </div>
-                                <div class="aux-text">
-<span class="aux-text-before">Get Started</span>                </div>
-            </a>
-            
+					    <style>
+/* MesonX Liquid-Glass CTA (replaces "Get Started" button) — glass tile + MESON X wordmark */
+.mesonx-glass-cta{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:230px;height:60px;padding:0 26px;border-radius:20px;text-decoration:none !important;user-select:none;overflow:hidden;background:linear-gradient(135deg,rgba(15,20,44,.92),rgba(7,10,26,.92));box-shadow:0 10px 26px -8px rgba(31,38,135,.4),0 2px 8px -2px rgba(31,38,135,.25);transition:transform .3s cubic-bezier(.34,1.8,.64,1),box-shadow .3s ease}
+.mesonx-glass-cta:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 16px 34px -10px rgba(31,38,135,.55),0 4px 12px -2px rgba(31,38,135,.32)}
+.mesonx-cta-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;border-radius:20px;pointer-events:none;z-index:0}
+.mesonx-cta-text{position:relative;z-index:1;display:inline-flex;align-items:baseline;justify-content:center;line-height:1;white-space:nowrap;filter:drop-shadow(0 4px 14px rgba(0,0,0,.5))}
+.mesonx-cta-text .mesonx-glass-word{font-family:'Zillah Modern Line','Zillah Modern',serif;font-size:30px;font-weight:normal;letter-spacing:.18em;color:#ffffff;line-height:1;text-transform:uppercase;text-shadow:0 0 8px rgba(0,198,255,.55),0 0 18px rgba(123,47,255,.35),0 0 30px rgba(255,47,180,.22)}
+.mesonx-cta-text .mesonx-glass-x{position:relative;display:inline-block;font-family:'ZnikomitNo25','Zillah Modern',serif;font-size:30px;font-weight:normal;line-height:1;margin-left:4px;animation:mesonx-glass-pulse 4s ease-in-out infinite}
+.mesonx-cta-text .mesonx-glass-x-base{color:#ffffff}
+.mesonx-cta-text .mesonx-glass-x-grad{position:absolute;inset:0;background-image:linear-gradient(90deg,#ff2fb4,#7b2fff,#00c6ff,#22d3a7,#ff2fb4);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;opacity:0;animation:mesonx-glass-shine 4s ease-in-out infinite}
+@keyframes mesonx-glass-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+@keyframes mesonx-glass-shine{0%,100%{opacity:0}50%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.mesonx-cta-text .mesonx-glass-x,.mesonx-cta-text .mesonx-glass-x-grad{animation:none}.mesonx-cta-text .mesonx-glass-x-grad{opacity:1}}
+@media only screen and (max-width:1024px){.mesonx-glass-cta{min-width:200px;height:52px;padding:0 20px}.mesonx-cta-text .mesonx-glass-word{font-size:26px}.mesonx-cta-text .mesonx-glass-x{font-size:26px}}
+</style>
+				    <div class="mesonx-glass-cta-wrap">
+                    <a class="mesonx-glass-cta" href="/mesonx.html" title="Meson X — Cloud AI" aria-label="Meson X — Cloud AI">
+                        <canvas class="mesonx-cta-canvas" id="mesonxHomeGlass" aria-hidden="true"></canvas>
+                        <span class="mesonx-cta-text" aria-hidden="true"><span class="mesonx-glass-word">MESON</span><span class="mesonx-glass-x"><span class="mesonx-glass-x-base">X</span><span class="mesonx-glass-x-grad">X</span></span></span>
+                    </a>
     </div>
 
     				</div>
@@ -1017,3 +1028,19 @@
             </div><!-- end container -->
         </div><!-- end wrapper -->
     </main><!-- end main -->
+
+<!-- MesonX Liquid-Glass CTA engine (pure WebGL, no deps) -->
+<script src="/liquid-glass.js" defer></script>
+<script>
+(function () {
+  function boot() {
+    if (!window.MesonLiquidGlass) { setTimeout(boot, 150); return; }
+    var cv = document.getElementById('mesonxHomeGlass');
+    if (!cv) return;
+    if (cv.dataset.glass === 'ok' || cv.dataset.glass === 'unsupported') return;
+    MesonLiquidGlass.init(cv, { rect: [0, 0, 1, 1], radiusPx: 20, solidBg: true });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
+</script>
