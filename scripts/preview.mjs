@@ -19,6 +19,8 @@ const TYPES = {
   ".webp": "image/webp",
   ".woff": "font/woff",
   ".woff2": "font/woff2",
+  ".ttf": "font/ttf",
+  ".otf": "font/otf",
   ".ico": "image/x-icon",
   ".xml": "application/xml",
   ".txt": "text/plain",

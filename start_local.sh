@@ -26,6 +26,27 @@ done
 
 cd "$(dirname "$0")"
 
+# Stop anything currently listening on the target port (e.g. a previous
+# preview instance) so the server doesn't die with EADDRINUSE.
+free_port() {
+  local port="$1" pids
+  pids="$(lsof -tnP -iTCP:"$port" -sTCP:LISTEN 2>/dev/null || true)"
+  if [[ -n "$pids" ]]; then
+    echo "🛑 Port $port is in use (PID(s): $(echo "$pids" | tr '\n' ' ')) — stopping ..."
+    kill $pids 2>/dev/null || true
+    sleep 1
+    pids="$(lsof -tnP -iTCP:"$port" -sTCP:LISTEN 2>/dev/null || true)"
+    if [[ -n "$pids" ]]; then
+      echo "⚠️  Still running — sending SIGKILL ..."
+      kill -9 $pids 2>/dev/null || true
+      sleep 1
+    fi
+    echo "✅ Port $port is now free."
+  else
+    echo "👍 Port $port is already free."
+  fi
+}
+
 if ! command -v node >/dev/null 2>&1; then
   echo "❌ Node.js is not installed. Install it from https://nodejs.org (v18+) and retry."
   exit 1
@@ -42,6 +63,7 @@ if [[ ! -d node_modules ]]; then
 fi
 
 if [[ "$MODE" == "dev" ]]; then
+  free_port "$PORT"
   echo "🚀 Starting dev server (hot reload) on http://localhost:$PORT ..."
   exec npx next dev -p "$PORT"
 fi
@@ -52,5 +74,6 @@ rm -rf out .next
 echo "🔨 Building static files ..."
 npm run build
 
+free_port "$PORT"
 echo "🚀 Previewing static export at http://localhost:$PORT ..."
 PORT="$PORT" exec node scripts/preview.mjs
