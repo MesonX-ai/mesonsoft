@@ -139,3 +139,13 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 .ms-vb-nodecard:hover .ms-vb-del{display:flex;align-items:center;justify-content:center}
 @media (max-width:640px){.ms-vb-stage{height:320px}}
 
+/* Innovative AI Solutions: canvas left of the heading, same row (desktop) */
+@media (min-width:1025px){
+  .elementor-424 .elementor-element.elementor-element-82a882b{--flex-wrap:nowrap;flex-wrap:nowrap;align-items:center}
+  .elementor-424 .elementor-element.elementor-element-aa78ee7{--width:53%;width:53%;max-width:53%;flex:0 0 auto}
+  .elementor-424 .elementor-element.elementor-element-896e765{--width:47%;width:47%;max-width:47%;padding-left:48px}
+  .elementor-424 .elementor-element.elementor-element-8a11f72{position:relative}
+  .elementor-424 .elementor-element.elementor-element-8a11f72 > .elementor-element-32e51e1{position:absolute;inset:0;width:auto;max-width:auto;pointer-events:none;z-index:0}
+  .elementor-424 .elementor-element.elementor-element-8a11f72 > .ms-vb-root{position:relative;z-index:1;width:100%;max-width:100%;flex:1 1 auto;min-width:0}
+}
+
