@@ -139,6 +139,14 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 .ms-vb-nodecard:hover .ms-vb-del{display:flex;align-items:center;justify-content:center}
 @media (max-width:640px){.ms-vb-stage{height:320px}}
 
+/* The column used to hold a static screenshot that Elementor custom CSS scaled
+   (scale 0.4–0.8) and pushed around with negative margins per breakpoint.
+   A live ReactFlow canvas must render 1:1, otherwise the scaled ancestor makes
+   node dragging map to the wrong coordinates. Higher specificity (4 classes)
+   than the legacy 3-class rule so this wins even though both are !important. */
+.elementor-424 .elementor-element.elementor-element-82a882b .elementor-element-b111e4b{transform:none !important}
+.elementor-424 .elementor-element.elementor-element-82a882b .elementor-element-b111e4b .elementor-element-populated{margin:0 !important}
+
 /* Innovative AI Solutions: canvas left of the heading, same row (desktop).
    Real DOM: 82a882b > aa78ee7 > 8a11f72 > [ b111e4b > [shape(abs), #ms-vb-root] , 896e765 heading ] */
 @media (min-width:1025px){
