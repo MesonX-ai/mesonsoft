@@ -200,3 +200,22 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
   .elementor-424 .elementor-element.elementor-element-82a882b .elementor-element-b111e4b > .ms-vb-root{position:relative;z-index:1;width:100% !important;max-width:100% !important;flex:1 1 auto !important;min-width:0}
 }
 
+
+/* "The Voice of Our Clients": typewriter effect for the testimonial quotes
+   (logic in /assets/ms-typing.js). A hidden ghost copy of the full quote and
+   the animated copy share a single grid cell, so the card keeps its final
+   height while the text is still being written out.
+   .ms-typing-stage (not .entry-content itself) is the grid container, so the
+   theme's ::before/::after decorations on .entry-content can never become
+   grid items. */
+.ms-typing-stage{display:grid}
+.ms-typing-stage > .ms-typing-ghost,
+.ms-typing-stage > .ms-typing-visual{grid-area:1/1/2/2;min-width:0}
+.ms-typing-stage > .ms-typing-ghost{visibility:hidden;pointer-events:none}
+.ms-typing-stage > .ms-typing-visual{z-index:1}
+/* The full quote for assistive technology. It must never affect layout, even
+   before the theme's own .screen-reader-text styles are parsed. */
+.entry-content.ms-typing > .screen-reader-text{position:absolute !important;width:1px !important;height:1px !important;margin:-1px !important;padding:0 !important;border:0 !important;overflow:hidden !important;clip:rect(0 0 0 0) !important;white-space:nowrap !important}
+.ms-typing-caret{display:inline-block;width:2px;height:1.05em;margin-left:2px;vertical-align:-0.18em;border-radius:1px;background-color:#9F66FF;animation:ms-typing-blink 1s step-end infinite}
+.ms-typing-caret-done{opacity:0;animation:none;transition:opacity 300ms ease}
+@keyframes ms-typing-blink{0%,100%{opacity:1}50%{opacity:0}}
