@@ -141,9 +141,27 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 
 /* Innovative AI Solutions: canvas left of the heading, same row (desktop) */
 @media (min-width:1025px){
-  .elementor-424 .elementor-element.elementor-element-82a882b{--flex-wrap:nowrap;flex-wrap:nowrap;align-items:center}
-  .elementor-424 .elementor-element.elementor-element-aa78ee7{--width:53%;width:53%;max-width:53%;flex:0 0 auto}
-  .elementor-424 .elementor-element.elementor-element-896e765{--width:47%;width:47%;max-width:47%;padding-left:48px}
+  .elementor-424 .elementor-element.elementor-element-82a882b,
+  .elementor-424 .elementor-element.elementor-element-82a882b > .e-con-inner{
+    --flex-wrap:nowrap !important;
+    flex-wrap:nowrap !important;
+    align-items:center !important;
+  }
+  .elementor-424 .elementor-element.elementor-element-82a882b .elementor-element-aa78ee7{
+    --width:54% !important;
+    width:54% !important;
+    max-width:54% !important;
+    flex:0 0 54% !important;
+    align-self:center !important;
+  }
+  .elementor-424 .elementor-element.elementor-element-82a882b .elementor-element-896e765{
+    --width:46% !important;
+    width:46% !important;
+    max-width:46% !important;
+    flex:0 0 46% !important;
+    padding-left:48px !important;
+    align-self:center !important;
+  }
   .elementor-424 .elementor-element.elementor-element-8a11f72{position:relative}
   .elementor-424 .elementor-element.elementor-element-8a11f72 > .elementor-element-32e51e1{position:absolute;inset:0;width:auto;max-width:auto;pointer-events:none;z-index:0}
   .elementor-424 .elementor-element.elementor-element-8a11f72 > .ms-vb-root{position:relative;z-index:1;width:100%;max-width:100%;flex:1 1 auto;min-width:0}
