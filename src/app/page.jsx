@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import Partial from '../components/Partial';
+import AgentCanvas from '../components/AgentCanvas';
 import { setCurrentPageKey } from '../lib/page-context';
 
 const manifest = JSON.parse(
@@ -15,5 +16,11 @@ export const metadata = {
 };
 
 export default function HomePage() {
-  return <Partial name="home.html" />;
+  return (
+    <>
+      <Partial name="home.html" />
+      <AgentCanvas />
+    </>
+  );
 }
+
