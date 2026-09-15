@@ -139,31 +139,56 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 .ms-vb-nodecard:hover .ms-vb-del{display:flex;align-items:center;justify-content:center}
 @media (max-width:640px){.ms-vb-stage{height:320px}}
 
-/* Innovative AI Solutions: canvas left of the heading, same row (desktop) */
+/* Innovative AI Solutions: canvas left of the heading, same row (desktop).
+   Real DOM: 82a882b > aa78ee7 > 8a11f72 > [ b111e4b > [shape(abs), #ms-vb-root] , 896e765 heading ] */
 @media (min-width:1025px){
-  .elementor-424 .elementor-element.elementor-element-82a882b,
+  .elementor-424 .elementor-element.elementor-element-82a882b{
+    --flex-wrap:nowrap !important;
+    flex-wrap:nowrap !important;
+    align-items:center !important;
+    --padding-left:10px !important;
+    --padding-right:10px !important;
+    padding-left:10px !important;
+    padding-right:10px !important;
+  }
+  /* Inner container must NOT add its own 10px, otherwise the row narrows to
+     1400px instead of the 1420px the MesonX Platform row uses. */
   .elementor-424 .elementor-element.elementor-element-82a882b > .e-con-inner{
     --flex-wrap:nowrap !important;
     flex-wrap:nowrap !important;
     align-items:center !important;
+    --padding-left:0 !important;
+    --padding-right:0 !important;
+    padding-left:0 !important;
+    padding-right:0 !important;
   }
   .elementor-424 .elementor-element.elementor-element-82a882b .elementor-element-aa78ee7{
-    --width:54% !important;
-    width:54% !important;
-    max-width:54% !important;
-    flex:0 0 54% !important;
-    align-self:center !important;
+    --width:100% !important;
+    width:100% !important;
+    max-width:100% !important;
+    flex:0 0 100% !important;
+  }
+  .elementor-424 .elementor-element.elementor-element-82a882b .elementor-element-8a11f72{
+    --flex-wrap:nowrap !important;
+    flex-wrap:nowrap !important;
+    align-items:center !important;
+  }
+  .elementor-424 .elementor-element.elementor-element-82a882b .elementor-element-b111e4b{
+    --width:55% !important;
+    width:55% !important;
+    max-width:55% !important;
+    flex:0 0 55% !important;
+    position:relative;
   }
   .elementor-424 .elementor-element.elementor-element-82a882b .elementor-element-896e765{
-    --width:46% !important;
-    width:46% !important;
-    max-width:46% !important;
-    flex:0 0 46% !important;
+    --width:45% !important;
+    width:45% !important;
+    max-width:45% !important;
+    flex:0 0 45% !important;
     padding-left:48px !important;
     align-self:center !important;
   }
-  .elementor-424 .elementor-element.elementor-element-8a11f72{position:relative}
-  .elementor-424 .elementor-element.elementor-element-8a11f72 > .elementor-element-32e51e1{position:absolute;inset:0;width:auto;max-width:auto;pointer-events:none;z-index:0}
-  .elementor-424 .elementor-element.elementor-element-8a11f72 > .ms-vb-root{position:relative;z-index:1;width:100%;max-width:100%;flex:1 1 auto;min-width:0}
+  .elementor-424 .elementor-element.elementor-element-82a882b .elementor-element-b111e4b > .elementor-element-32e51e1{position:absolute;inset:0;width:auto;max-width:auto;pointer-events:none;z-index:0}
+  .elementor-424 .elementor-element.elementor-element-82a882b .elementor-element-b111e4b > .ms-vb-root{position:relative;z-index:1;width:100% !important;max-width:100% !important;flex:1 1 auto !important;min-width:0}
 }
 
