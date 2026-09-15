@@ -7,13 +7,13 @@ const manifest = JSON.parse(
   fs.readFileSync(path.join(process.cwd(), 'src', 'partials', 'manifest.json'), 'utf8')
 );
 
-setCurrentPageKey('terms');
+setCurrentPageKey('advanced-llm-integration');
 
 export const metadata = {
-  title: manifest.pages.terms.title,
-  description: manifest.pages.terms.description,
+  title: manifest.pages['advanced-llm-integration'].title,
+  description: manifest.pages['advanced-llm-integration'].description,
 };
 
-export default function TermsOfUsePage() {
-  return <Partial name="terms-of-use.html" />;
+export default function AdvancedLLMIntegrationPage() {
+  return <Partial name="advanced-llm-integration.html" />;
 }

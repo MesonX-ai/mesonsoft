@@ -7,13 +7,13 @@ const manifest = JSON.parse(
   fs.readFileSync(path.join(process.cwd(), 'src', 'partials', 'manifest.json'), 'utf8')
 );
 
-setCurrentPageKey('terms');
+setCurrentPageKey('enterprise-grade-security');
 
 export const metadata = {
-  title: manifest.pages.terms.title,
-  description: manifest.pages.terms.description,
+  title: manifest.pages['enterprise-grade-security'].title,
+  description: manifest.pages['enterprise-grade-security'].description,
 };
 
-export default function TermsOfUsePage() {
-  return <Partial name="terms-of-use.html" />;
+export default function EnterpriseGradeSecurityPage() {
+  return <Partial name="enterprise-grade-security.html" />;
 }

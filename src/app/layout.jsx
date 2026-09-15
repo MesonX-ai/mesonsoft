@@ -2,9 +2,14 @@ import fs from 'node:fs';
 import path from 'node:path';
 import Partial from '../components/Partial';
 import ScriptLoader from '../components/ScriptLoader';
+import { getCurrentPageKey } from '../lib/page-context';
 
 const PARTIALS_DIR = path.join(process.cwd(), 'src', 'partials');
 const manifest = JSON.parse(fs.readFileSync(path.join(PARTIALS_DIR, 'manifest.json'), 'utf8'));
+
+const BASE_BODY_CLASSES = (manifest.bodyClasses || []).filter(
+  (c) => !c.startsWith('page-id-') && !c.startsWith('elementor-page-')
+);
 
 export const viewport = {
   width: 'device-width',
@@ -24,16 +29,23 @@ export const metadata = {
         .map((i) => ({ url: i.href, sizes: i.sizes, type: i.href.endsWith('.png') ? 'image/png' : undefined })),
     ],
     apple: manifest.icons
-      .filter((i) => /apple/.test(i.rel))
+      .filter((i) => /apple/i.test(i.rel))
       .map((i) => i.href),
   },
 };
 
 export default function RootLayout({ children }) {
+  const pageKey = getCurrentPageKey();
+  const allPageClasses = manifest.pageBodyClasses?.[pageKey] || [];
+  const pageSpecificClasses = allPageClasses.filter(
+    (c) => c.startsWith('page-id-') || c.startsWith('elementor-page-')
+  );
+  const bodyClasses = [...BASE_BODY_CLASSES, ...pageSpecificClasses];
+
   return (
     <html lang="en">
       <body
-        className={manifest.bodyClasses.join(' ')}
+        className={bodyClasses.join(' ')}
         data-framed=""
         data-elementor-device-mode="desktop"
       >
