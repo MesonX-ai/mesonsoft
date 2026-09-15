@@ -15,6 +15,10 @@
  * is real text it also re-flows correctly on resize and after the webfonts
  * load — no measured pixel heights to go stale.
  *
+ * Each quote starts typing 750ms after its card finishes fading in (the Auxin
+ * appearl reveal takes ~500ms, so the stagger lands as the card settles), with
+ * a further 180ms cascade between neighbouring quotes.
+ *
  * Accessibility: the animated copy is aria-hidden and the complete quote is
  * exposed through a .screen-reader-text span, so assistive technology reads the
  * testimonial once, in full, instead of one letter at a time.
@@ -29,6 +33,7 @@
   var SPEED = 15; // base ms per character
   var SPEED_JITTER = 6; // +/- ms, keeps the rhythm from feeling robotic
   var PUNCTUATION_PAUSE = 130; // extra beat after . , ! ? ; :
+  var REVEAL_SETTLE = 750; // ms after the card's fade-in completes before typing
   var STAGGER = 180; // ms between neighbouring quotes
   var CARET_HOLD = 1200; // ms the caret lingers after the last character
   var REVEAL_TIMEOUT = 2500; // ms cap while waiting for the card to fade in
@@ -123,8 +128,9 @@
   }
 /**
    * The testimonials use the Auxin appear animations, which hold their column
-   * at opacity 0 until the appearl plugin reveals it. Typing before that point
-   * would be invisible, so wait for the card to finish fading in.
+   * at opacity 0 until the appearl plugin reveals it. Typing waits for the
+   * reveal to complete, then settles briefly so the motion reads as one
+   * continuous entrance: card fades in, quote types out.
    */
   function whenRevealed(el, callback) {
     var ancestor = el.closest ? el.closest('.aux-appear-watch-animation') : null;
@@ -138,7 +144,7 @@
       var opacity = parseFloat(window.getComputedStyle(ancestor).opacity);
       // "!(opacity < 0.99)" is also true for NaN, i.e. a missing value.
       if (!(opacity < 0.99) || Date.now() - started > REVEAL_TIMEOUT) {
-        callback();
+        window.setTimeout(callback, REVEAL_SETTLE);
         return;
       }
       window.requestAnimationFrame(poll);
