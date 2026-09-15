@@ -93,3 +93,8 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
    original Auxin entrance animations (aux-appear-watch-animation +
    aux-animated) exactly like the Innovative AI Solutions cards.
    No custom CSS needed; the theme handles everything. */
+
+/* MesonX Platform product icons (inline SVG) */
+.ms-product-icon{display:block;margin:0 auto;max-width:100%;height:auto}
+.aux-ico-box .ms-product-icon{width:96px;height:96px}
+@media (max-width:767px){.aux-ico-box .ms-product-icon{width:76px;height:76px}}
