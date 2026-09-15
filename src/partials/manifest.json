@@ -80,6 +80,10 @@
     },
     {
       "type": "src",
+      "src": "/assets/ms-count-up.js"
+    },
+    {
+      "type": "src",
       "src": "/assets/widgets.js"
     },
     {
