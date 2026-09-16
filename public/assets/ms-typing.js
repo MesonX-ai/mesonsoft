@@ -138,9 +138,8 @@
     state.textLength = 0;
 
     function step() {
-      if (state.runId !== runId) return; // superseded by a reset or restart
+      if (state.runId !== runId) return;
       if (i >= text.length) {
-        state.textLength = 0;
         state.doneTimer = window.setTimeout(function () {
           if (state.runId !== runId) return;
           caret.classList.add('ms-typing-caret-done');
@@ -197,24 +196,6 @@
     var rafId = 0;
     var settleTimer = 0;
 
-    function done() {
-      if (settled) return;
-      settled = true;
-      state.revealCancel = null;
-      callback();
-    }
-
-    (function poll() {
-      if (settled || state.revealCancel !== cancelWait) return;
-      var opacity = parseFloat(window.getComputedStyle(ancestor).opacity);
-      // "!(opacity < 0.99)" is also true for NaN, i.e. a missing value.
-      if (!(opacity < 0.99) || Date.now() - started > REVEAL_TIMEOUT) {
-        settleTimer = window.setTimeout(done, REVEAL_SETTLE);
-        return;
-      }
-      rafId = window.requestAnimationFrame(poll);
-    })();
-
     function cancelWait() {
       settled = true;
       if (rafId) window.cancelAnimationFrame(rafId);
@@ -224,6 +205,26 @@
     }
 
     state.revealCancel = cancelWait;
+
+    function done() {
+      if (settled) return;
+      settled = true;
+      state.revealCancel = null;
+      callback();
+    }
+
+    function poll() {
+      if (settled || state.revealCancel !== cancelWait) return;
+      var opacity = parseFloat(window.getComputedStyle(ancestor).opacity);
+      // "!(opacity < 0.99)" is also true for NaN, i.e. a missing value.
+      if (!(opacity < 0.99) || Date.now() - started > REVEAL_TIMEOUT) {
+        settleTimer = window.setTimeout(done, REVEAL_SETTLE);
+        return;
+      }
+      rafId = window.requestAnimationFrame(poll);
+    }
+
+    rafId = window.requestAnimationFrame(poll);
   }
 
   function init() {
