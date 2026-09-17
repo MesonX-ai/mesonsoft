@@ -219,3 +219,89 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 .ms-typing-caret{display:inline-block;width:2px;height:1.05em;margin-left:2px;vertical-align:-0.18em;border-radius:1px;background-color:#9F66FF;animation:ms-typing-blink 1s step-end infinite}
 .ms-typing-caret-done{opacity:0;animation:none;transition:opacity 300ms ease}
 @keyframes ms-typing-blink{0%,100%{opacity:1}50%{opacity:0}}
+
+
+/* ===== Animated icon-list icons (Mesonsoft product pages) ===== */
+.aux-icon-list-item .aux-icon-list-icon.ms-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    vertical-align: -4px;
+    color: #HCC5FF;
+    transition: color 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.aux-icon-list-item .aux-icon-list-icon.ms-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    transition: stroke 0.3s ease;
+}
+
+/* Float animation - purple items */
+.aux-icon-list-item.beea072 .aux-icon-list-icon.ms-icon {
+    color: #9F66FF;
+    animation: ms-icon-float 3.2s ease-in-out infinite;
+}
+
+/* Float animation - pink items (staggered) */
+.aux-icon-list-item.79db1fb .aux-icon-list-icon.ms-icon {
+    color: #FF196E;
+    animation: ms-icon-float 3.6s ease-in-out infinite;
+}
+.aux-icon-list-item.79db1fb:nth-child(2) .aux-icon-list-icon.ms-icon {
+    animation-delay: -1.8s;
+}
+
+/* Hover pop effect */
+.aux-icon-list-item:hover .aux-icon-list-icon.ms-icon {
+    transform: scale(1.25) translateY(-2px);
+    color: #HCC5FF;
+}
+.aux-icon-list-item.beea072:hover .aux-icon-list-icon.ms-icon {
+    color: #9F66FF;
+    filter: drop-shadow(0 4px 8px rgba(159, 102, 255, 0.4));
+}
+.aux-icon-list-item.79db1fb:hover .aux-icon-list-icon.ms-icon {
+    color: #FF196E;
+    filter: drop-shadow(0 4px 8px rgba(255, 25, 110, 0.4));
+}
+
+/* Pulse glow on hover */
+.aux-icon-list-item:hover .aux-icon-list-icon.ms-icon {
+    animation: ms-icon-pop 0.4s ease-out;
+}
+
+@keyframes ms-icon-float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-5px) rotate(2deg);
+    }
+}
+
+@keyframes ms-icon-pop {
+    0% {
+        transform: scale(1.25) translateY(-2px);
+    }
+    50% {
+        transform: scale(1.35) translateY(-4px);
+    }
+    100% {
+        transform: scale(1.25) translateY(-2px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .aux-icon-list-item .aux-icon-list-icon.ms-icon {
+        animation: none !important;
+        transition: color 0.2s ease;
+    }
+    .aux-icon-list-item:hover .aux-icon-list-icon.ms-icon {
+        transform: none;
+    }
+}
+

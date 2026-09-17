@@ -172,6 +172,8 @@
     state.typed.textContent = '';
     state.textLength = 0;
     state.caret.classList.remove('ms-typing-caret-done');
+    state.revealCancel = null;
+    state.typing = false;
   }
 /**
    * The testimonials use the Auxin appear animations, which hold their column
