@@ -321,7 +321,8 @@ function init(canvas, opts) {
         global.removeEventListener('pointerdown', onPointer);
         global.removeEventListener('touchmove', onPointer);
       },
-      setRect: function (r) { rect = r; }
+      setRect: function (r) { rect = r; },
+      setMouse: function (m) { mx = tmx = m[0]; my = tmy = m[1]; }
     };
     canvas.__mesonGlassReady = api;
     return api;

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Meson X — Cloud AI</title>
+<title>Meson X — sQuark Cloud AI</title>
 <meta name="color-scheme" content="dark">
 <style>
   :root { color-scheme: dark }
@@ -107,7 +107,7 @@
 
   <!-- Below the glass layer: products over the background, same screen -->
   <main class="mesonx-page">
-    <p class="mesonx-sub">Cloud AI — pick a product to explore</p>
+    <p class="mesonx-sub">sQuark Cloud AI — pick a product to explore</p>
     <section class="mesonx-products" aria-label="Meson X products">
       <a class="mesonx-card" href="https://www.squark-browser.ai" target="_blank" rel="noopener" aria-label="sQuarkAI — Enterprise AI">
         <span class="mesonx-card-icon mesonx-tint-cyan" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="10" y="10" width="4" height="4"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg></span>
@@ -143,6 +143,17 @@
           radiusPx: 96,
           solidBg:  true
         });
+        // Default specular highlight: center of the X in "MESON X" on load
+        // (matches the spot seen when hovering My Fam AI). uMouse is UV space
+        // with y=0 at bottom; X center measured via the .mesonx-x element box.
+        function glowAtXCenter() {
+          if (!api || !api.setMouse) return;
+          var x = document.querySelector('.mesonx-x');
+          if (!x) return;
+          var br = x.getBoundingClientRect();
+          var vw = window.innerWidth || 1, vh = window.innerHeight || 1;
+          api.setMouse([(br.left + br.right) / 2 / vw, 1 - (br.top + br.bottom) / 2 / vh]);
+        }
         // Keep the glass panel glued to Row 1 (hero): measure hero box in
         // viewport px, convert to shader UV (origin bottom-left), pad slightly.
         function fitGlass() {
@@ -159,10 +170,11 @@
           if (x1 > x0 && y1 > y0) api.setRect([x0, y0, x1, y1]);
         }
         fitGlass();
+        glowAtXCenter();
         window.addEventListener('resize', fitGlass);
         window.addEventListener('orientationchange', fitGlass);
-        if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitGlass);
-        window.addEventListener('load', fitGlass);
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { fitGlass(); glowAtXCenter(); });
+        window.addEventListener('load', function () { fitGlass(); glowAtXCenter(); });
       } catch (e) {
         var el = document.getElementById('err');
         el.style.display = 'block';
