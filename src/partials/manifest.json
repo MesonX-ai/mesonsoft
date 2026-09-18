@@ -92,6 +92,10 @@
     },
     {
       "type": "src",
+      "src": "/assets/ms-excellence-icons.js"
+    },
+    {
+      "type": "src",
       "src": "/assets/widgets.js"
     },
     {
