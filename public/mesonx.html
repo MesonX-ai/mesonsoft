@@ -10,19 +10,24 @@
   * { box-sizing: border-box }
   html, body { height: 100%; margin: 0; overflow: hidden; background: #070a18; }
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #fff;
-    height: 100vh; height: 100svh; display: flex; flex-direction: column; align-items: center;
+    height: 100vh; height: 100svh; display: flex; align-items: center;
     justify-content: center; background: transparent; }
+  /* Stack = Row 1 (glass + Meson X) + Row 2 (products); the stack itself is
+     centered horizontally AND vertically in the viewport. */
+  .mesonx-stack { position: relative; z-index: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: clamp(10px, 2.5vh, 26px);
+    width: min(1200px, 94vw); max-height: 100vh; max-height: 100svh; }
   /* Full-screen original background: fixed canvas draws the colourful
      scene across the whole viewport — no solid black anywhere. */
   canvas#glass { position: fixed; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; z-index: 0; }
   /* Hero = glass stage; content block as a whole is screen-centered (see body).
      Hero centers its text within itself. */
-  .mesonx-hero { position: relative; z-index: 1; flex: 0 0 auto; width: min(1200px, 94vw); display: flex;
+  .mesonx-hero { position: relative; z-index: 1; flex: 0 0 auto; width: 100%; display: flex;
     flex-direction: column; align-items: center; justify-content: center; padding: 0;
     overflow: visible; background: transparent; }
   /* Products live BELOW the glass layer, same screen — no page scrollbar.
      Transparent so the full-screen colourful background shows through. */
-  .mesonx-page { position: relative; z-index: 1; flex: 0 0 auto; width: min(1200px, 94vw); display: flex; flex-direction: column;
+  .mesonx-page { position: relative; z-index: 1; flex: 0 0 auto; width: 100%; display: flex; flex-direction: column;
     align-items: center; justify-content: flex-start; padding: 6px 20px 12px; background: transparent; }
 
   /* Same brand fonts as the site header — relative so the page works on file:// too */
@@ -92,6 +97,7 @@
   <!-- Full-screen original background canvas (colourful scene, entire viewport) -->
   <canvas id="glass" aria-label="Meson X liquid glass panel"></canvas>
 
+  <div class="mesonx-stack">
   <header class="mesonx-hero">
     <a class="mesonx-wrap" href="https://www.squark-browser.ai/cloud-ai/" target="_blank" rel="noopener"
      title="Meson — Cloud AI" aria-label="Meson — Cloud AI">
@@ -123,6 +129,7 @@
       </a>
     </section>
   </main>
+  </div>
   <div id="err"></div>
 
   <!-- Liquid glass engine (pure WebGL, no CDN): -->
@@ -131,11 +138,31 @@
     'use strict';
     (function () {
       try {
-        MesonLiquidGlass.init(document.getElementById('glass'), {
+        var api = MesonLiquidGlass.init(document.getElementById('glass'), {
           rect:     [0.06, 0.30, 0.94, 0.70],
           radiusPx: 96,
           solidBg:  true
         });
+        // Keep the glass panel glued to Row 1 (hero): measure hero box in
+        // viewport px, convert to shader UV (origin bottom-left), pad slightly.
+        function fitGlass() {
+          if (!api || !api.setRect) return;
+          var hero = document.querySelector('.mesonx-hero');
+          if (!hero) return;
+          var br = hero.getBoundingClientRect();
+          var vw = window.innerWidth || 1, vh = window.innerHeight || 1;
+          var padX = vw * 0.02, padY = vh * 0.03;
+          var x0 = Math.max(0, (br.left - padX) / vw);
+          var x1 = Math.min(1, (br.right + padX) / vw);
+          var y1 = Math.max(0, 1 - (br.top - padY) / vh);
+          var y0 = Math.min(1, 1 - (br.bottom + padY) / vh);
+          if (x1 > x0 && y1 > y0) api.setRect([x0, y0, x1, y1]);
+        }
+        fitGlass();
+        window.addEventListener('resize', fitGlass);
+        window.addEventListener('orientationchange', fitGlass);
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitGlass);
+        window.addEventListener('load', fitGlass);
       } catch (e) {
         var el = document.getElementById('err');
         el.style.display = 'block';
