@@ -237,12 +237,22 @@ if [[ -z "$FTP_HOST" || -z "$FTP_USER" || -z "$FTP_PASS" ]]; then
   [[ -f "$FTP_CONFIG" ]] || fail "ftp-config.json not found and FTP_HOST/FTP_USER/FTP_PASS not set."
 
   CREDS="$(FTP_CONFIG="$FTP_CONFIG" python3 - <<'PY'
-import json, os
-cfg = json.load(open(os.environ["FTP_CONFIG"]))
-for e in cfg:
-    if e.get("name", "").lower() == "mesonsoft":
-        print(f"{e.get('host','')}\t{e.get('port',21)}\t{e.get('username','')}\t{e.get('password','')}")
+import os, re
+# NOTE: the shared ftp-config.json is not strict JSON (missing comma between
+# two entries), so parse tolerantly with regex instead of json.load.
+raw = open(os.environ["FTP_CONFIG"], encoding="utf-8").read()
+blocks = re.findall(r"\{[^{}]*\}", raw, re.S)
+found = None
+for b in blocks:
+    m = re.search(r'"name"\s*:\s*"([^"]*)"', b)
+    if m and m.group(1).lower() == "mesonsoft":
+        found = b
         break
+if found:
+    def g(k, d=""):
+        mm = re.search(r'"%s"\s*:\s*(?:"([^"]*)"|(\d+))' % k, found)
+        return (mm.group(1) if mm.group(1) is not None else mm.group(2)) if mm else d
+    print(f"{g('host')}\t{g('port', '21')}\t{g('username')}\t{g('password')}")
 PY
 )"
   [[ -n "$CREDS" ]] || fail "No \"Mesonsoft\" entry found in $FTP_CONFIG."
