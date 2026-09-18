@@ -8,18 +8,20 @@
 <style>
   :root { color-scheme: dark }
   * { box-sizing: border-box }
-  html, body { height: 100%; margin: 0; overflow: hidden; background:
-    radial-gradient(1200px 800px at 70% -10%, #141a3d 0%, #0a0e24 55%, #06081a 100%); }
+  html, body { height: 100%; margin: 0; overflow: hidden; background: #070a18; }
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #fff;
-    height: 100vh; height: 100svh; display: flex; flex-direction: column; }
+    height: 100vh; height: 100svh; display: flex; flex-direction: column; background: transparent; }
+  /* Full-screen original background: fixed canvas draws the colourful
+     scene across the whole viewport — no solid black anywhere. */
+  canvas#glass { position: fixed; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; z-index: 0; }
   /* Hero = glass stage, shifted up to make room; products share the same screen below */
-  .mesonx-hero { position: relative; flex: 0 0 50vh; flex: 0 0 50svh; min-height: 0; display: flex;
-    flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 5vh;
-    overflow: hidden; }
-  canvas#glass { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; }
-  /* Products live BELOW the glass layer, same screen — no page scrollbar */
+  .mesonx-hero { position: relative; z-index: 1; flex: 0 0 50vh; flex: 0 0 50svh; min-height: 0; display: flex;
+    flex-direction: column; align-items: center; justify-content: center; padding-bottom: 2vh;
+    overflow: visible; background: transparent; }
+  /* Products live BELOW the glass layer, same screen — no page scrollbar.
+     Transparent so the full-screen colourful background shows through. */
   .mesonx-page { position: relative; z-index: 1; flex: 1; min-height: 0; display: flex; flex-direction: column;
-    align-items: center; justify-content: flex-start; padding: 6px 20px 12px; }
+    align-items: center; justify-content: flex-start; padding: 6px 20px 12px; background: transparent; }
 
   /* Same brand fonts as the site header — relative so the page works on file:// too */
   @font-face { font-family: 'Zillah Modern Line'; src: url('assets/fonts/ZillahModernLine.ttf') format('truetype'); font-weight: normal; font-style: normal; font-display: swap }
@@ -71,7 +73,7 @@
   @media (max-width: 900px) { .mesonx-products { grid-template-columns: minmax(0, 420px) } }
   /* Short screens: shrink hero glass + cards so all fits in one view */
   @media (max-height: 800px) {
-    .mesonx-hero { flex-basis: 44svh; padding-top: 3vh; }
+    .mesonx-hero { flex-basis: 44svh; padding-bottom: 1vh; }
     .mesonx-text { font-size: 6vw; }
     .mesonx-x { font-size: 6.4vw; }
     .mesonx-card { padding: 12px 16px 12px; }
@@ -87,16 +89,17 @@
 </style>
 </head>
 <body>
-  <!-- Glass layer: MESON X text lives ON the glass, full-viewport hero -->
+  <!-- Full-screen original background canvas (colourful scene, entire viewport) -->
+  <canvas id="glass" aria-label="Meson X liquid glass panel"></canvas>
+
   <header class="mesonx-hero">
-    <canvas id="glass" aria-label="Meson X liquid glass panel"></canvas>
     <a class="mesonx-wrap" href="https://www.squark-browser.ai/cloud-ai/" target="_blank" rel="noopener"
      title="Meson — Cloud AI" aria-label="Meson — Cloud AI">
     <span class="mesonx-text">MESON</span><span class="mesonx-x"><span class="mesonx-x-base">X</span><span class="mesonx-x-grad" aria-hidden="true">X</span></span>
   </a>
   </header>
 
-  <!-- Below the glass layer: products on the plain page background -->
+  <!-- Below the glass layer: products over the background, same screen -->
   <main class="mesonx-page">
     <p class="mesonx-sub">Cloud AI — pick a product to explore</p>
     <section class="mesonx-products" aria-label="Meson X products">
@@ -129,7 +132,7 @@
     (function () {
       try {
         MesonLiquidGlass.init(document.getElementById('glass'), {
-          rect:     [0.14, 0.26, 0.86, 0.74],
+          rect:     [0.14, 0.54, 0.86, 0.96],
           radiusPx: 96,
           solidBg:  true
         });
