@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Meson X — sQuark Cloud AI</title>
 <meta name="color-scheme" content="dark">
+<link rel="preload" href="assets/fonts/ZillahModernLine.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="assets/fonts/ZnikomitNo25.otf" as="font" type="font/otf" crossorigin>
 <style>
   :root { color-scheme: dark }
   * { box-sizing: border-box }
@@ -30,9 +32,13 @@
   .mesonx-page { position: relative; z-index: 1; flex: 0 0 auto; width: 100%; display: flex; flex-direction: column;
     align-items: center; justify-content: flex-start; padding: 6px 20px 12px; background: transparent; }
 
-  /* Same brand fonts as the site header — relative so the page works on file:// too */
-  @font-face { font-family: 'Zillah Modern Line'; src: url('assets/fonts/ZillahModernLine.ttf') format('truetype'); font-weight: normal; font-style: normal; font-display: swap }
-  @font-face { font-family: 'ZnikomitNo25'; src: url('assets/fonts/ZnikomitNo25.otf') format('opentype'); font-weight: normal; font-style: normal; font-display: swap }
+  /* Same brand fonts as the site header — relative so the page works on file:// too.
+     display:block hides text until the brand fonts arrive (no fallback-font flash). */
+  @font-face { font-family: 'Zillah Modern Line'; src: url('assets/fonts/ZillahModernLine.ttf') format('truetype'); font-weight: normal; font-style: normal; font-display: block }
+  @font-face { font-family: 'ZnikomitNo25'; src: url('assets/fonts/ZnikomitNo25.otf') format('opentype'); font-weight: normal; font-style: normal; font-display: block }
+  /* Keep the hero hidden until brand fonts are ready (or timeout), so the
+     first paint never shows the fallback font. JS adds .fonts-ready. */
+  .mesonx-wrap { visibility: hidden; }
 
   /* MESON X on the glass, centered, ≈60% of the glass panel width.
      Glass panel spans 6%–94% of the viewport width (88vw); 60% of that = 52.8vw.
@@ -41,6 +47,7 @@
   .mesonx-wrap { position: relative; z-index: 2; display: inline-flex; flex-direction: row; align-items: baseline; justify-content: center;
     line-height: 1; text-decoration: none; user-select: none; white-space: nowrap;
     filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.45)) }
+  .fonts-ready .mesonx-wrap, .fonts-fallback .mesonx-wrap { visibility: visible; }
   .mesonx-text { font-family: 'Zillah Modern Line', 'Zillah Modern', serif; font-size: 14.2vw;
     font-weight: normal; letter-spacing: .04em; color: #ffffff; line-height: 1; text-transform: uppercase;
     text-shadow: 0 0 12px rgba(0, 198, 255, 0.55), 0 0 28px rgba(123, 47, 255, 0.35), 0 0 46px rgba(255, 47, 180, 0.22) }
@@ -133,6 +140,28 @@
   <div id="err"></div>
 
   <!-- Liquid glass engine (pure WebGL, no CDN): -->
+  <script>
+    'use strict';
+    /* Gate first paint on brand fonts: reveal hero only after both faces load
+       (or 3s timeout, so the page never stays blank on font failure). */
+    (function () {
+      var done = false;
+      function show(ok) {
+        if (done) return; done = true;
+        document.documentElement.classList.add(ok ? 'fonts-ready' : 'fonts-fallback');
+      }
+      try {
+        if (document.fonts && document.fonts.load) {
+          var loads = [
+            document.fonts.load('16px "Zillah Modern Line"'),
+            document.fonts.load('16px "ZnikomitNo25"')
+          ];
+          Promise.all(loads).then(function () { show(true); }, function () { show(false); });
+          setTimeout(function () { show(false); }, 3000);
+        } else { show(true); }
+      } catch (e) { show(true); }
+    })();
+  </script>
   <script src="liquid-glass.js"></script>
   <script>
     'use strict';
