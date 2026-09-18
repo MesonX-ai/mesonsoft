@@ -8,33 +8,35 @@
 <style>
   :root { color-scheme: dark }
   * { box-sizing: border-box }
-  html, body { min-height: 100%; margin: 0; overflow-x: hidden; background:
+  html, body { height: 100%; margin: 0; overflow: hidden; background:
     radial-gradient(1200px 800px at 70% -10%, #141a3d 0%, #0a0e24 55%, #06081a 100%); }
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #fff; }
-  /* Hero = full viewport glass stage; canvas scrolls away with it */
-  .mesonx-hero { position: relative; height: 100vh; height: 100svh; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; overflow: hidden; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #fff;
+    height: 100vh; height: 100svh; display: flex; flex-direction: column; }
+  /* Hero = glass stage, shifted up to make room; products share the same screen below */
+  .mesonx-hero { position: relative; flex: 0 0 50vh; flex: 0 0 50svh; min-height: 0; display: flex;
+    flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 5vh;
+    overflow: hidden; }
   canvas#glass { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; }
-  /* Products live BELOW the glass layer, on the plain page background */
-  .mesonx-page { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center;
-    padding: 56px 20px 88px; }
+  /* Products live BELOW the glass layer, same screen — no page scrollbar */
+  .mesonx-page { position: relative; z-index: 1; flex: 1; min-height: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: flex-start; padding: 6px 20px 12px; }
 
   /* Same brand fonts as the site header — relative so the page works on file:// too */
   @font-face { font-family: 'Zillah Modern Line'; src: url('assets/fonts/ZillahModernLine.ttf') format('truetype'); font-weight: normal; font-style: normal; font-display: swap }
   @font-face { font-family: 'ZnikomitNo25'; src: url('assets/fonts/ZnikomitNo25.otf') format('opentype'); font-weight: normal; font-style: normal; font-display: swap }
 
   /* MESON X on the glass, centered, ≈60% of the glass panel width.
-     Glass panel spans 14%–86% of the viewport (72vw); 60% of that = 43.2vw.
-     Glyph ratio measured from the site header: "MESON X" ≈ 128.2px at 42px,
-     so text = 42*4.852px = 14.15vw and X = 45*4.852px = 15.16vw. */
+     Glass panel spans 14%–86% of the viewport width (72vw); 60% of that = 43.2vw.
+     Glyph ratio measured from the site header: "MESON X" ≈ 128.2px at 42px.
+     Scaled ×0.5 to fit hero + products in one screen: text 7.1vw, X 7.6vw. */
   .mesonx-wrap { position: relative; z-index: 2; display: inline-flex; flex-direction: row; align-items: baseline; justify-content: center;
     line-height: 1; text-decoration: none; user-select: none; white-space: nowrap;
     filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.45)) }
-  .mesonx-text { font-family: 'Zillah Modern Line', 'Zillah Modern', serif; font-size: 14.15vw;
+  .mesonx-text { font-family: 'Zillah Modern Line', 'Zillah Modern', serif; font-size: 7.1vw;
     font-weight: normal; letter-spacing: .04em; color: #ffffff; line-height: 1; text-transform: uppercase;
     text-shadow: 0 0 12px rgba(0, 198, 255, 0.55), 0 0 28px rgba(123, 47, 255, 0.35), 0 0 46px rgba(255, 47, 180, 0.22) }
   .mesonx-x { position: relative; display: inline-block; font-family: 'ZnikomitNo25', 'Zillah Modern', serif;
-    font-size: 15.16vw; font-weight: normal; line-height: 1; margin-left: .09em;
+    font-size: 7.6vw; font-weight: normal; line-height: 1; margin-left: .09em;
     animation: mesonx-pulse 4s ease-in-out infinite }
   .mesonx-x-base { color: #ffffff }
   .mesonx-x-grad { position: absolute; inset: 0;
@@ -45,28 +47,38 @@
   @keyframes mesonx-shine { 0%,100% { opacity: 0 } 50% { opacity: 1 } }
   @media (prefers-reduced-motion: reduce) { .mesonx-x, .mesonx-x-grad { animation: none } .mesonx-x-grad { opacity: 1 } }
 
-  .mesonx-sub { margin: 18px 0 0; font-size: clamp(15px, 1.6vw, 19px); color: rgba(255,255,255,.82);
+  .mesonx-sub { margin: 0 0 10px; font-size: clamp(13px, 1.4vw, 16px); color: rgba(255,255,255,.82);
     letter-spacing: .02em; text-align: center }
-  .mesonx-products { display: grid; grid-template-columns: repeat(3, minmax(0, 300px)); gap: 22px;
-    margin-top: 40px; justify-content: center }
+  .mesonx-products { display: grid; grid-template-columns: repeat(3, minmax(0, 280px)); gap: 16px;
+    margin-top: 0; justify-content: center }
   .mesonx-card { display: flex; flex-direction: column; align-items: center; text-align: center;
-    padding: 30px 26px 28px; border-radius: 22px; text-decoration: none; color: #fff;
+    padding: 18px 20px 16px; border-radius: 18px; text-decoration: none; color: #fff;
     background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.16);
     box-shadow: 0 18px 50px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.18); }
-  .mesonx-card-icon { display: grid; place-items: center; width: 76px; height: 76px; border-radius: 22px;
-    border: 1px solid rgba(255,255,255,.22); margin-bottom: 18px; }
-  .mesonx-card-icon svg { width: 40px; height: 40px }
+  .mesonx-card-icon { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.22); margin-bottom: 10px; }
+  .mesonx-card-icon svg { width: 30px; height: 30px }
   .mesonx-tint-cyan { color: #19c2e6; background: linear-gradient(145deg, rgba(27,176,206,.34), rgba(27,176,206,.10)) }
   .mesonx-tint-purple { color: #9b7bff; background: linear-gradient(145deg, rgba(123,92,255,.34), rgba(123,92,255,.10)) }
   .mesonx-tint-pink { color: #ff6aa5; background: linear-gradient(145deg, rgba(255,79,162,.32), rgba(255,79,162,.10)) }
-  .mesonx-card h2 { margin: 0 0 8px; font-size: 21px; font-weight: 700 }
-  .mesonx-card p { margin: 0 0 16px; font-size: 14px; line-height: 1.55; color: rgba(255,255,255,.75) }
-  .mesonx-card-cta { font-size: 13.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; opacity: .85 }
+  .mesonx-card h2 { margin: 0 0 6px; font-size: 17px; font-weight: 700 }
+  .mesonx-card p { margin: 0 0 10px; font-size: 12.5px; line-height: 1.5; color: rgba(255,255,255,.75) }
+  .mesonx-card-cta { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; opacity: .85 }
   .mesonx-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,.32); }
   .mesonx-card:hover .mesonx-card-icon { transform: scale(1.08) rotate(-4deg); }
   .mesonx-card-icon { transition: transform .35s cubic-bezier(.34,1.8,.64,1); }
   .mesonx-card { transition: transform .3s cubic-bezier(.34,1.56,.64,1), border-color .3s ease; }
   @media (max-width: 900px) { .mesonx-products { grid-template-columns: minmax(0, 420px) } }
+  /* Short screens: shrink hero glass + cards so all fits in one view */
+  @media (max-height: 800px) {
+    .mesonx-hero { flex-basis: 44svh; padding-top: 3vh; }
+    .mesonx-text { font-size: 6vw; }
+    .mesonx-x { font-size: 6.4vw; }
+    .mesonx-card { padding: 12px 16px 12px; }
+    .mesonx-card-icon { width: 44px; height: 44px; border-radius: 13px; margin-bottom: 8px; }
+    .mesonx-card-icon svg { width: 24px; height: 24px; }
+    .mesonx-card p { display: none; }
+  }
 
   #err { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 9; display: none;
     max-width: 580px; padding: 18px 22px; border-radius: 14px; background: #2a1030; color: #ffd7e8;
