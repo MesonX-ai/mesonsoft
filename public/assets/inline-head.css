@@ -413,11 +413,14 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
     78% { transform: rotate(4deg) scale(1.035); }
 }
 
-/* ---- hover: extra glow lift. Uses `filter` (not transform) so the running
-   keyframes above can never cancel it. ---- */
-.ms-excellence-ico:hover { filter: drop-shadow(0 18px 30px rgba(159, 102, 255, 0.45)); }
-.ms-x-agent:hover { filter: drop-shadow(0 18px 30px rgba(255, 25, 110, 0.45)); }
-.ms-x-security:hover { filter: drop-shadow(0 18px 30px rgba(72, 192, 72, 0.45)); }
+/* ---- hover: extra glow lift, driven by the CARD (`.ms-feature-card`) rather
+   than the icon itself. Now that the whole card is a link, an invisible
+   stretched-link layer sits above the icon, so `:hover` on the icon alone
+   would never fire. Uses `filter` (not transform) so the running keyframes
+   above can never cancel it. ---- */
+.ms-feature-card:hover .ms-excellence-ico { filter: drop-shadow(0 18px 30px rgba(159, 102, 255, 0.45)); }
+.ms-feature-card:hover .ms-x-agent { filter: drop-shadow(0 18px 30px rgba(255, 25, 110, 0.45)); }
+.ms-feature-card:hover .ms-x-security { filter: drop-shadow(0 18px 30px rgba(72, 192, 72, 0.45)); }
 
 /* With scripting disabled the observer never runs, so never hide the icons. */
 @media (scripting: none) {
@@ -438,5 +441,43 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
         transform: none !important;
         filter: none !important;
     }
-    .ms-excellence-ico:hover { filter: none !important; }
+    .ms-feature-card:hover .ms-excellence-ico,
+    .ms-feature-card:hover .ms-x-agent,
+    .ms-feature-card:hover .ms-x-security { filter: none !important; }
+}
+/* ===== Whole-card links — "Delivering AI Excellence" (home page) =====
+   post-9001-9002.css already gives .aux-widget-advanced-text a hover shadow
+   and shifts the description colour, so these cards have always LOOKED
+   clickable while only the title text actually navigated. The rules below
+   stretch the existing title <a> across the whole card (the standard
+   "stretched link" pattern), so the clickable area now matches the hover
+   surface — one real link per card, no duplicate/empty anchors, and the
+   keyboard tab order is unchanged.
+
+   The ::after is sized against .aux-widget-advanced-text, the element that
+   owns the hover shadow, so hit area and hover area are the same box.
+   .aux-text-widget-content sits between the link and that element and is
+   position:relative in main.css, which would otherwise become the containing
+   block, so it is reset to static — scoped to .ms-feature-card only. These
+   cards contain no absolutely-positioned or overlay children, so the reset
+   has no other effect (proved by a before/after geometry fingerprint plus a
+   pixel diff of the whole page). */
+.ms-feature-card .aux-text-widget-content { position: static; }
+
+.ms-feature-card .col-title a::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+}
+
+/* Keyboard focus: ring the whole card, but only for keyboard users
+   (:focus-visible) so a mouse click never paints a focus ring. */
+.ms-feature-card:has(.col-title a:focus-visible) {
+    outline: 2px solid #9F66FF;
+    outline-offset: 6px;
+    border-radius: 6px;
 }
