@@ -88,6 +88,10 @@
     },
     {
       "type": "src",
+      "src": "/assets/ms-icon-entrance.js"
+    },
+    {
+      "type": "src",
       "src": "/assets/widgets.js"
     },
     {

@@ -221,14 +221,14 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 @keyframes ms-typing-blink{0%,100%{opacity:1}50%{opacity:0}}
 
 
-/* ===== Animated icon-list icons (Mesonsoft product pages) ===== */
+/* ===== Entrance-animated icon-list icons (Mesonsoft product pages) ===== */
 .aux-icon-list-item .aux-icon-list-icon.ms-icon {
     display: inline-block;
     width: 24px;
     height: 24px;
     margin-right: 10px;
     vertical-align: -4px;
-    color: #HCC5FF;
+    color: #9F66FF;
     transition: color 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -240,68 +240,86 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
     transition: stroke 0.3s ease;
 }
 
-/* Float animation - purple items */
-.aux-icon-list-item.beea072 .aux-icon-list-icon.ms-icon {
+/* ---- initial (pre-entrance) state ---- */
+.aux-icon-list-item-beea072 .aux-icon-list-icon.ms-icon {
     color: #9F66FF;
-    animation: ms-icon-float 3.2s ease-in-out infinite;
+    transform: scale(0.55) translateY(10px);
+    opacity: 0;
+    transition: color 0.3s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.35s ease;
 }
-
-/* Float animation - pink items (staggered) */
-.aux-icon-list-item.79db1fb .aux-icon-list-icon.ms-icon {
+.aux-icon-list-item-79db1fb .aux-icon-list-icon.ms-icon {
     color: #FF196E;
-    animation: ms-icon-float 3.6s ease-in-out infinite;
+    transform: scale(0.55) translateY(10px);
+    opacity: 0;
+    transition: color 0.3s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.35s ease;
 }
-.aux-icon-list-item.79db1fb:nth-child(2) .aux-icon-list-icon.ms-icon {
-    animation-delay: -1.8s;
+.aux-icon-list-item-79db1fb:nth-child(2) .aux-icon-list-icon.ms-icon {
+    transition-delay: 0.12s;
 }
 
-/* Hover pop effect */
-.aux-icon-list-item:hover .aux-icon-list-icon.ms-icon {
-    transform: scale(1.25) translateY(-2px);
-    color: #HCC5FF;
+/* ---- once the item has scrolled into view ---- */
+.aux-icon-list-item.ms-icon-entered .aux-icon-list-icon.ms-icon {
+    opacity: 1;
+    transform: scale(1) translateY(0);
 }
-.aux-icon-list-item.beea072:hover .aux-icon-list-icon.ms-icon {
+.aux-icon-list-item.ms-icon-entered.aux-icon-list-item-beea072 .aux-icon-list-icon.ms-icon {
     color: #9F66FF;
-    filter: drop-shadow(0 4px 8px rgba(159, 102, 255, 0.4));
 }
-.aux-icon-list-item.79db1fb:hover .aux-icon-list-icon.ms-icon {
+.aux-icon-list-item.ms-icon-entered.aux-icon-list-item-79db1fb .aux-icon-list-icon.ms-icon {
     color: #FF196E;
-    filter: drop-shadow(0 4px 8px rgba(255, 25, 110, 0.4));
 }
 
-/* Pulse glow on hover */
-.aux-icon-list-item:hover .aux-icon-list-icon.ms-icon {
-    animation: ms-icon-pop 0.4s ease-out;
+/* ---- entrance keyframe (runs once, then holds its final state) ---- */
+.aux-icon-list-item.ms-icon-entered .aux-icon-list-icon.ms-icon {
+    animation: ms-icon-entrance 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.aux-icon-list-item-79db1fb.ms-icon-entered .aux-icon-list-icon.ms-icon {
+    animation-delay: 0.1s;
+}
+.aux-icon-list-item-79db1fb:nth-child(2).ms-icon-entered .aux-icon-list-icon.ms-icon {
+    animation-delay: 0.22s;
 }
 
-@keyframes ms-icon-float {
-    0%, 100% {
-        transform: translateY(0) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-5px) rotate(2deg);
-    }
-}
-
-@keyframes ms-icon-pop {
+@keyframes ms-icon-entrance {
     0% {
-        transform: scale(1.25) translateY(-2px);
+        opacity: 0;
+        transform: scale(0.55) translateY(10px) rotate(-6deg);
     }
-    50% {
-        transform: scale(1.35) translateY(-4px);
+    60% {
+        opacity: 1;
+        transform: scale(1.12) translateY(-2px) rotate(2deg);
     }
     100% {
-        transform: scale(1.25) translateY(-2px);
+        opacity: 1;
+        transform: scale(1) translateY(0) rotate(0deg);
     }
+}
+
+/* ---- hover pop effect (after entrance) ---- */
+.aux-icon-list-item:hover .aux-icon-list-icon.ms-icon {
+    transform: scale(1.22) translateY(-2px);
+    color: #9F66FF;
+}
+.aux-icon-list-item-beea072:hover .aux-icon-list-icon.ms-icon {
+    color: #9F66FF;
+    filter: drop-shadow(0 4px 8px rgba(159, 102, 255, 0.45));
+}
+.aux-icon-list-item-79db1fb:hover .aux-icon-list-icon.ms-icon {
+    color: #FF196E;
+    filter: drop-shadow(0 4px 8px rgba(255, 25, 110, 0.45));
 }
 
 @media (prefers-reduced-motion: reduce) {
     .aux-icon-list-item .aux-icon-list-icon.ms-icon {
         animation: none !important;
         transition: color 0.2s ease;
+        transform: none !important;
+        opacity: 1 !important;
     }
-    .aux-icon-list-item:hover .aux-icon-list-icon.ms-icon {
-        transform: none;
+    .aux-icon-list-item.ms-icon-entered .aux-icon-list-icon.ms-icon {
+        animation: none !important;
     }
 }
 
