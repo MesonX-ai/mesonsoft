@@ -199,6 +199,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
     flex:0 0 45% !important;
     padding-left:48px !important;
     align-self:center !important;
+    margin-left:120px !important;
   }
   .elementor-424 .elementor-element.elementor-element-82a882b .elementor-element-b111e4b > .elementor-element-32e51e1{position:absolute;inset:0;width:auto;max-width:auto;pointer-events:none;z-index:0}
   .elementor-424 .elementor-element.elementor-element-82a882b .elementor-element-b111e4b > .ms-vb-root{position:relative;z-index:1;width:100% !important;max-width:100% !important;flex:1 1 auto !important;min-width:0}
@@ -460,7 +461,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 @media (min-width: 1025px) {
   :is(.elementor-9001, .elementor-9002)
     .elementor-element.elementor-element-896e765 {
-    --margin-left: 280px;
+    --margin-left: 80px;
   }
 }
 
