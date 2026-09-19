@@ -460,7 +460,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 @media (min-width: 1025px) {
   :is(.elementor-9001, .elementor-9002)
     .elementor-element.elementor-element-896e765 {
-    --margin-left: 80px;
+    --margin-left: 280px;
   }
 }
 
