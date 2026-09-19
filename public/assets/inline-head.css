@@ -453,6 +453,15 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
     .ms-feature-card:hover .ms-x-security,
     .ms-feature-card:hover .ms-product-icon { filter: none !important; }
 }
+/* Shift "Innovative AI Solutions" section 10% more to the right.
+   Existing left padding is 250px; +10% = +25px → 275px. */
+@media (min-width: 1025px) {
+  :is(.elementor-9001, .elementor-9002)
+    .elementor-element.elementor-element-896e765 {
+    --padding-left: 275px;
+  }
+}
+
 /* ===== Whole-card links — "Delivering AI Excellence" + "MesonX Platform"
    product cards (home page) =====
    post-9001-9002.css already gives .aux-widget-advanced-text a hover shadow
