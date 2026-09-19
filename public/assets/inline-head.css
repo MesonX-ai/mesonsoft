@@ -453,12 +453,14 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
     .ms-feature-card:hover .ms-x-security,
     .ms-feature-card:hover .ms-product-icon { filter: none !important; }
 }
-/* Shift "Innovative AI Solutions" section 10% more to the right.
-   Existing left padding is 250px; +10% = +25px → 275px. */
+/* Add space between Visual Agent Builder and Innovative AI Solutions.
+   896e765 is a flex sibling of the VB container (b111e4b) inside 8a11f72.
+   Its existing --padding-left:250px pads the heading content, not the
+   section-to-section gap, so we add explicit margin-left here. */
 @media (min-width: 1025px) {
   :is(.elementor-9001, .elementor-9002)
     .elementor-element.elementor-element-896e765 {
-    --padding-left: 275px;
+    --margin-left: 80px;
   }
 }
 
