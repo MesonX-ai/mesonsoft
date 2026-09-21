@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import Partial from '../components/Partial';
 import ScriptLoader from '../components/ScriptLoader';
+import MesonChat from '../components/MesonChat';
 import { getCurrentPageKey } from '../lib/page-context';
 
 const PARTIALS_DIR = path.join(process.cwd(), 'src', 'partials');
@@ -63,6 +64,9 @@ export default function RootLayout({ children }) {
           {children}
           <Partial name="footer.html" />
         </div>
+        {/* Mounted outside #inner-body: the theme's page-transition animation puts
+            a transform/clip-path on #inner-body, which would trap position:fixed. */}
+        <MesonChat />
         <Partial name="hidden.html" />
       </body>
     </html>

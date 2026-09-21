@@ -502,3 +502,428 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
     outline-offset: 6px;
     border-radius: 6px;
 }
+
+/* ===== MesonX AI chat widget — floating assistant (home + every page) =====
+   Ported from the squark-browser.ai chat widget and restyled in the Mesonsoft
+   brand: violet #9F66FF to magenta #FF196E, deep ink #1f1b30, muted #8b86a3,
+   lavender line #ece6f6, wash #f8f6fc.
+
+   The theme's own stylesheets style bare `button`, `input` and `p` very
+   broadly, so every rule below is namespaced under .ms-chat-* and the two
+   form controls get explicit appearance/font resets.
+
+   Stacking: the theme tops out at z-index 999999 (Elementor popups), so the
+   widget sits above it with a value used by floating-assistant widgets.
+   The component is mounted as a direct child of <body> (see app/layout.jsx),
+   outside #inner-body, so no transformed ancestor can trap position:fixed. */
+
+/* ---- normalization reset -------------------------------------------------
+   The theme styles bare `button` very aggressively — Elementor's
+   frontend.min.css sets `padding:1.25em 2.2em` (=> 20px 35px) on every
+   <button>, and the theme sheets all use box-sizing:border-box. On a
+   fixed-size icon button that padding exceeds the whole declared width
+   (58px wide − 70px of padding ⇒ negative content box), so the inline <svg> —
+   a flex item with the default `flex-shrink:1` — collapsed to width:0 and the
+   icons disappeared. Zero the padding and stop the SVGs from shrinking. */
+.ms-chat-launcher,
+.ms-chat-headbtn,
+.ms-chat-send,
+.ms-chat-mode,
+.ms-chat-chip{
+    box-sizing:border-box;
+    line-height:1;
+}
+.ms-chat-launcher,
+.ms-chat-headbtn,
+.ms-chat-send{
+    padding:0;
+}
+.ms-chat-launcher svg,
+.ms-chat-panel svg{
+    flex:0 0 auto;
+    max-width:none;
+}
+
+/* ---- launcher button (bottom-right) ---- */
+.ms-chat-launcher{
+    position:fixed;
+    right:26px;
+    bottom:26px;
+    z-index:2147483000;
+    width:58px;
+    height:58px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:0;
+    border-radius:50%;
+    background:linear-gradient(135deg,#9F66FF 0%,#FF196E 100%);
+    color:#fff;
+    cursor:pointer;
+    box-shadow:0 14px 30px -8px rgba(159,102,255,.65),0 4px 12px -2px rgba(255,25,110,.4);
+    transition:transform .22s cubic-bezier(.22,1,.36,1),box-shadow .22s ease;
+    -webkit-appearance:none;
+    appearance:none;
+}
+.ms-chat-launcher:hover{
+    transform:translateY(-3px) scale(1.06);
+    box-shadow:0 20px 38px -8px rgba(159,102,255,.75),0 6px 16px -2px rgba(255,25,110,.5);
+}
+.ms-chat-launcher:focus-visible{outline:2px solid #1f1b30;outline-offset:3px}
+.ms-chat-launcher svg{position:relative;z-index:1}
+
+/* pulsing halo behind the icon */
+.ms-chat-launchglow{
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.55),transparent 60%);
+    animation:ms-chat-glow 2.6s ease-in-out infinite;
+}
+@keyframes ms-chat-glow{
+    0%,100%{opacity:.35;transform:scale(1)}
+    50%{opacity:.85;transform:scale(1.12)}
+}
+
+/* unread badge */
+.ms-chat-badge{
+    position:absolute;
+    top:-4px;
+    right:-4px;
+    z-index:2;
+    min-width:20px;
+    height:20px;
+    padding:0 5px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:999px;
+    background:#FF196E;
+    border:2px solid #fff;
+    color:#fff;
+    font-size:11px;
+    font-weight:700;
+    line-height:1;
+}
+
+/* ---- panel ---- */
+.ms-chat-panel{
+    position:fixed;
+    right:24px;
+    bottom:100px;
+    z-index:2147483000;
+    width:392px;
+    height:min(600px,calc(100vh - 140px));
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    border:1px solid #ece6f6;
+    border-radius:22px;
+    background:#fff;
+    box-shadow:0 40px 80px -28px rgba(31,27,48,.42),0 8px 24px -10px rgba(159,102,255,.3);
+    font-family:inherit;
+    animation:ms-chat-in .28s cubic-bezier(.22,1,.36,1);
+}
+.ms-chat-panel-wide{
+    width:min(760px,calc(100vw - 48px));
+    height:min(760px,calc(100vh - 140px));
+}
+@keyframes ms-chat-in{
+    from{opacity:0;transform:translateY(14px) scale(.97)}
+    to{opacity:1;transform:none}
+}
+
+/* ---- panel header ---- */
+.ms-chat-head{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 14px 14px 16px;
+    background:linear-gradient(120deg,#9F66FF 0%,#c04bff 55%,#FF196E 100%);
+    color:#fff;
+}
+.ms-chat-avatar{
+    width:34px;
+    height:34px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex:0 0 auto;
+    border-radius:50%;
+    background:rgba(255,255,255,.22);
+    border:1px solid rgba(255,255,255,.35);
+}
+.ms-chat-id{flex:1 1 auto;min-width:0}
+.ms-chat-name{
+    margin:0;
+    font-size:15px;
+    font-weight:700;
+    letter-spacing:.2px;
+    line-height:1.25;
+    color:#fff;
+}
+.ms-chat-status{
+    margin:2px 0 0;
+    display:flex;
+    align-items:center;
+    gap:5px;
+    font-size:11.5px;
+    line-height:1.2;
+    color:rgba(255,255,255,.85);
+}
+.ms-chat-livedot{
+    width:6px;
+    height:6px;
+    flex:0 0 auto;
+    border-radius:50%;
+    background:#7dffb0;
+    box-shadow:0 0 0 0 rgba(125,255,176,.8);
+    animation:ms-chat-live 2s ease-out infinite;
+}
+@keyframes ms-chat-live{
+    0%{box-shadow:0 0 0 0 rgba(125,255,176,.75)}
+    70%{box-shadow:0 0 0 7px rgba(125,255,176,0)}
+    100%{box-shadow:0 0 0 0 rgba(125,255,176,0)}
+}
+.ms-chat-headbtn{
+    width:30px;
+    height:30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex:0 0 auto;
+    border:1px solid rgba(255,255,255,.3);
+    border-radius:9px;
+    background:rgba(255,255,255,.14);
+    color:#fff;
+    cursor:pointer;
+    transition:background .18s ease,transform .18s ease;
+    -webkit-appearance:none;
+    appearance:none;
+}
+.ms-chat-headbtn:hover{background:rgba(255,255,255,.3);transform:translateY(-1px)}
+.ms-chat-headbtn:focus-visible{outline:2px solid #fff;outline-offset:2px}
+
+/* ---- message area ---- */
+.ms-chat-scroll{
+    flex:1 1 auto;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    padding:18px 16px 8px;
+    background:#f8f6fc;
+}
+.ms-chat-row{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:4px;
+    margin-bottom:14px;
+}
+.ms-chat-row-user{align-items:flex-end}
+.ms-chat-bubble{
+    max-width:84%;
+    padding:11px 14px;
+    border-radius:16px;
+    font-size:14px;
+    line-height:1.55;
+    white-space:pre-wrap;
+    overflow-wrap:anywhere;
+}
+.ms-chat-bubble p{margin:0 0 8px}
+.ms-chat-bubble p:last-child{margin-bottom:0}
+.ms-chat-bubble-ai{
+    background:#fff;
+    border:1px solid #ece6f6;
+    border-bottom-left-radius:5px;
+    color:#1f1b30;
+    box-shadow:0 2px 8px -4px rgba(31,27,48,.12);
+}
+.ms-chat-bubble-user{
+    background:linear-gradient(135deg,#9F66FF 0%,#c04bff 100%);
+    border-bottom-right-radius:5px;
+    color:#fff;
+    box-shadow:0 6px 16px -8px rgba(159,102,255,.7);
+}
+.ms-chat-meta{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    font-size:10.5px;
+    color:#8b86a3;
+}
+.ms-chat-img{
+    display:block;
+    max-width:100%;
+    height:auto;
+    border-radius:12px;
+}
+
+/* typing indicator */
+.ms-chat-typing{display:inline-flex;align-items:center;gap:5px;padding:2px 0}
+.ms-chat-typing i{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#c9a8ff;
+    animation:ms-chat-typing 1.2s ease-in-out infinite;
+}
+.ms-chat-typing i:nth-child(2){animation-delay:.18s}
+.ms-chat-typing i:nth-child(3){animation-delay:.36s}
+@keyframes ms-chat-typing{
+    0%,60%,100%{transform:translateY(0);opacity:.45}
+    30%{transform:translateY(-5px);opacity:1}
+}
+
+/* ---- suggestion chips ---- */
+.ms-chat-chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    padding:10px 16px 0;
+    background:#fff;
+    border-top:1px solid #f2edfa;
+}
+.ms-chat-chip{
+    padding:7px 12px;
+    border:1px solid #e4def0;
+    border-radius:999px;
+    background:#f8f6fc;
+    color:#3d3752;
+    font-family:inherit;
+    font-size:12px;
+    line-height:1.2;
+    cursor:pointer;
+    transition:border-color .18s ease,background .18s ease,color .18s ease,transform .18s ease;
+    -webkit-appearance:none;
+    appearance:none;
+}
+.ms-chat-chip:hover:not(:disabled){
+    border-color:#9F66FF;
+    background:#f3ecff;
+    color:#7b3fd4;
+    transform:translateY(-1px);
+}
+.ms-chat-chip:disabled{opacity:.5;cursor:default}
+.ms-chat-chip:focus-visible{outline:2px solid #9F66FF;outline-offset:2px}
+
+/* ---- composer ---- */
+.ms-chat-form{
+    padding:10px 14px 14px;
+    background:#fff;
+}
+.ms-chat-modes{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    margin-bottom:9px;
+}
+.ms-chat-mode{
+    padding:5px 12px;
+    border:1px solid #e4def0;
+    border-radius:999px;
+    background:#fff;
+    color:#8b86a3;
+    font-family:inherit;
+    font-size:11.5px;
+    font-weight:600;
+    line-height:1.2;
+    cursor:pointer;
+    transition:all .18s ease;
+    -webkit-appearance:none;
+    appearance:none;
+}
+.ms-chat-mode:hover:not(:disabled){border-color:#c9a8ff;color:#7b3fd4}
+.ms-chat-mode.is-active{
+    border-color:transparent;
+    background:linear-gradient(135deg,#9F66FF 0%,#FF196E 100%);
+    color:#fff;
+}
+.ms-chat-mode:disabled{opacity:.55;cursor:default}
+.ms-chat-mode:focus-visible{outline:2px solid #9F66FF;outline-offset:2px}
+.ms-chat-brand{
+    margin-left:auto;
+    font-size:10.5px;
+    font-weight:700;
+    letter-spacing:1.4px;
+    text-transform:uppercase;
+    color:#c9a8ff;
+}
+.ms-chat-inputrow{display:flex;align-items:center;gap:9px}
+.ms-chat-input{
+    flex:1 1 auto;
+    min-width:0;
+    height:44px;
+    padding:0 15px;
+    border:1px solid #ece6f6;
+    border-radius:14px;
+    background:#f8f6fc;
+    color:#1f1b30;
+    font-family:inherit;
+    font-size:14px;
+    line-height:44px;
+    transition:border-color .18s ease,box-shadow .18s ease,background .18s ease;
+    -webkit-appearance:none;
+    appearance:none;
+    box-shadow:none;
+}
+.ms-chat-input::placeholder{color:#a9a3bd}
+.ms-chat-input:focus{
+    outline:0;
+    border-color:#9F66FF;
+    background:#fff;
+    box-shadow:0 0 0 3px rgba(159,102,255,.16);
+}
+.ms-chat-send{
+    width:44px;
+    height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex:0 0 auto;
+    border:0;
+    border-radius:14px;
+    background:linear-gradient(135deg,#9F66FF 0%,#FF196E 100%);
+    color:#fff;
+    cursor:pointer;
+    box-shadow:0 8px 18px -8px rgba(159,102,255,.75);
+    transition:transform .18s ease,opacity .18s ease,box-shadow .18s ease;
+    -webkit-appearance:none;
+    appearance:none;
+}
+.ms-chat-send:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 22px -8px rgba(255,25,110,.6)}
+.ms-chat-send:disabled{opacity:.45;cursor:default;box-shadow:none}
+.ms-chat-send:focus-visible{outline:2px solid #1f1b30;outline-offset:2px}
+
+/* ---- small screens: the panel leaves a 12px gutter all round ---- */
+@media (max-width:520px){
+    .ms-chat-launcher{right:16px;bottom:16px;width:54px;height:54px}
+    .ms-chat-panel,
+    .ms-chat-panel-wide{
+        right:12px;
+        left:12px;
+        width:auto;
+        height:min(72vh,calc(100vh - 120px));
+        bottom:88px;
+    }
+    .ms-chat-bubble{max-width:90%}
+}
+
+/* ---- respect the OS "reduce motion" setting ---- */
+@media (prefers-reduced-motion:reduce){
+    .ms-chat-panel,
+    .ms-chat-launchglow,
+    .ms-chat-livedot,
+    .ms-chat-typing i{
+        animation:none;
+    }
+    .ms-chat-launcher,
+    .ms-chat-chip,
+    .ms-chat-mode,
+    .ms-chat-send,
+    .ms-chat-headbtn{
+        transition:none;
+    }
+}
+
+
+
