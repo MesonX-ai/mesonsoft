@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { ChatMarkdown } from './ChatMarkdown';
 
 /**
  * MesonX AI — floating chat widget (Mesonsoft theme).
@@ -449,7 +450,11 @@ export default function MesonChat() {
                       src={message.image_url}
                     />
                   ) : message.text ? (
-                    message.text
+                    message.role === 'user' ? (
+                      message.text
+                    ) : (
+                      <ChatMarkdown content={message.text} />
+                    )
                   ) : busy ? (
                     <span className="ms-chat-typing">
                       <i />
