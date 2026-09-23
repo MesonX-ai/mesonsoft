@@ -105,6 +105,10 @@
     },
     {
       "type": "src",
+      "src": "/assets/ms-contact-form.js"
+    },
+    {
+      "type": "src",
       "src": "/assets/widgets.js"
     },
     {

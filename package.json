@@ -4,7 +4,8 @@
   "private": true,
   "description": "Mesonsoft website built with Next.js from the saved WordPress/Elementor pages",
   "scripts": {
-    "dev": "next dev",
+    "dev": "node scripts/dev-local.mjs",
+    "dev:next": "next dev",
     "build": "next build",
     "start": "next start"
   },
