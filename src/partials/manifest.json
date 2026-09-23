@@ -63,7 +63,8 @@
     "/assets/post-502.css",
     "/assets/post-503.css",
     "/assets/nunito.css",
-    "/assets/post-422.css"
+    "/assets/post-422.css",
+    "/assets/ms-cloud-agentic.css"
   ],
   "scripts": [
     {
@@ -93,6 +94,14 @@
     {
       "type": "src",
       "src": "/assets/ms-excellence-icons.js"
+    },
+    {
+      "type": "src",
+      "src": "/assets/ms-cloud-chat.js"
+    },
+    {
+      "type": "src",
+      "src": "/assets/ms-agent-adoption.js"
     },
     {
       "type": "src",
@@ -322,9 +331,36 @@
     "enterprise-grade-security": {
       "title": "Enterprise-Grade Security \u2013 Mesonsoft",
       "description": "Trust Built Into Every Layer. Security is foundational to everything we build. Our AI solutions are designed with enterprise-grade security from the ground up \u2014 protecting your data, ensuring compliance, and giving you complete control."
+    },
+    "cloud-ai": {
+      "title": "sQuark Cloud AI \u2013 Mesonsoft",
+      "description": "sQuark Cloud AI brings Gemini-style features to the web: live voice chat, image generation, deep research, Gems, Canvas, extensions, and connected apps\u2014all privacy-first."
+    },
+    "agentic-ai": {
+      "title": "sQuark Agentic AI \u2013 Mesonsoft",
+      "description": "sQuark Agentic AI turns requests into outcomes: autonomous agents that plan, use your connected apps, and complete real tasks end to end\u2014private by design."
+    },
+    "agentic-sdlc": {
+      "title": "sQuark Agentic SDLC \u2013 Mesonsoft",
+      "description": "Discover the Agentic SDLC: autonomous AI agents that plan, build, test, and operate software in a closed-loop, self-healing flywheel\u2014part of sQuark Agentic AI."
     }
   },
   "pageBodyClasses": {
+    "cloud-ai": [
+      "home",
+      "page-id-9004",
+      "elementor-page-9004"
+    ],
+    "agentic-ai": [
+      "home",
+      "page-id-9005",
+      "elementor-page-9005"
+    ],
+    "agentic-sdlc": [
+      "home",
+      "page-id-9006",
+      "elementor-page-9006"
+    ],
     "home": [
       "home",
       "wp-singular",

@@ -1,0 +1,224 @@
+/**
+ * ms-cloud-agentic.css — Mesonsoft theme styling for the Cloud AI
+ * (/cloud-ai) and Agentic AI (/agentic-ai) pages, replicated from the
+ * sQuark.ai pages and restyled with the Mesonsoft light glass look
+ * (white cards, #ece6f6 borders, #9F66FF → #FF196E gradients).
+ */
+
+/* ===================== Shared (both pages) ===================== */
+.ms-cai-section{max-width:1200px;margin:0 auto;padding:56px 20px}
+.ms-cai-section-head{max-width:760px;margin:0 auto 40px;text-align:center}
+.ms-cai-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;border:1px solid rgba(159,102,255,.35);background:linear-gradient(135deg,rgba(159,102,255,.12),rgba(255,25,110,.08));color:#7c3aed;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.ms-cai-eyebrow svg{width:16px;height:16px}
+.ms-cai-h1{margin:18px 0 0;font-size:clamp(34px,5vw,52px);line-height:1.12;font-weight:700;letter-spacing:-1.5px;color:#171f2b}
+.ms-cai-h2{margin:14px 0 0;font-size:clamp(26px,3.4vw,38px);line-height:1.2;font-weight:700;letter-spacing:-1px;color:#171f2b}
+.ms-cai-h3{margin:0;font-size:22px;font-weight:700;letter-spacing:-.5px;color:#171f2b}
+.ms-cai-lede{margin:18px 0 0;max-width:560px;color:#5b6675;font-size:16.5px;line-height:1.7}
+.ms-cai-sub{margin:14px auto 0;max-width:640px;color:#5b6675;font-size:16px;line-height:1.65}
+.ms-cai-grad{background-image:linear-gradient(90deg,#9F66FF,#FF196E 55%,#0f9ec2);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.ms-cai-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:28px}
+.ms-cai-actions-center{justify-content:center}
+.ms-cai-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 26px;border-radius:999px;border:none;font-family:inherit;font-size:14.5px;font-weight:700;text-decoration:none;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease,background .25s ease,border-color .25s ease}
+.ms-cai-btn svg{width:17px;height:17px}
+.ms-cai-btn-primary{color:#fff;background:linear-gradient(115deg,#9F66FF,#FF196E);box-shadow:0 14px 30px -14px rgba(159,102,255,.65)}
+.ms-cai-btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 42px -16px rgba(255,25,110,.55)}
+.ms-cai-btn-ghost{color:#171f2b;background:rgba(255,255,255,.72);border:1px solid rgba(159,102,255,.35);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.ms-cai-btn-ghost:hover{border-color:#9F66FF;transform:translateY(-2px)}
+.ms-cai-btn-glow{color:#7c3aed;background:rgba(159,102,255,.1);border:1px solid rgba(159,102,255,.4)}
+.ms-cai-btn-glow:hover{background:rgba(159,102,255,.2);transform:translateY(-2px)}
+.ms-cai-btn:focus-visible,.ms-cai-eyebrow:focus-visible{outline:2px solid #9F66FF;outline-offset:2px}
+.ms-cai-check-list{margin:20px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.ms-cai-check-list li{display:flex;align-items:center;gap:10px;font-size:14px;color:#3d3752}
+.ms-cai-check-list svg{width:17px;height:17px;flex:0 0 17px;color:#0ea77e}
+.ms-cai-icon{width:22px;height:22px;display:inline-flex}
+.ms-cai-icon svg{width:100%;height:100%}
+
+/* Card icon chips (reuses the header dropdown tint language) */
+.ms-t-purple{color:#7c3aed;border-color:rgba(159,102,255,.4);background:linear-gradient(145deg,rgba(159,102,255,.18),rgba(159,102,255,.06))}
+.ms-t-pink{color:#e0447f;border-color:rgba(255,25,110,.4);background:linear-gradient(145deg,rgba(255,25,110,.16),rgba(255,25,110,.05))}
+.ms-t-cyan{color:#0f9ec2;border-color:rgba(15,158,194,.4);background:linear-gradient(145deg,rgba(27,176,206,.18),rgba(27,176,206,.06))}
+.ms-t-green{color:#0ea77e;border-color:rgba(34,167,126,.4);background:linear-gradient(145deg,rgba(34,211,167,.18),rgba(34,211,167,.06))}
+.ms-t-orange{color:#e07020;border-color:rgba(224,112,32,.4);background:linear-gradient(145deg,rgba(255,157,77,.2),rgba(255,157,77,.06))}
+.ms-cai-chip{width:44px;height:44px;flex:0 0 44px;border-radius:13px;border:1px solid;display:grid;place-items:center}
+.ms-cai-chip svg{width:22px;height:22px}
+.ms-cai-chip-sm{width:40px;height:40px;flex:0 0 40px;border-radius:12px}
+.ms-cai-chip-sm svg{width:20px;height:20px}
+/* ===================== Cloud AI page ===================== */
+.ms-ca-hero{display:grid;gap:44px;align-items:center}
+@media (min-width:1100px){.ms-ca-hero{grid-template-columns:1.05fr .95fr}}
+.ms-ca-trust{display:flex;flex-wrap:wrap;gap:12px 26px;margin:28px 0 0;padding:0;list-style:none}
+.ms-ca-trust li{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:#5b6675}
+.ms-ca-trust svg{width:16px;height:16px;color:#7c3aed}
+
+/* Live chat demo panel */
+.ms-ca-chat{position:relative;display:flex;flex-direction:column;height:470px;padding:18px;border-radius:22px;border:1px solid rgba(255,255,255,.78);background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(248,246,252,.68));-webkit-backdrop-filter:blur(24px) saturate(1.6);backdrop-filter:blur(24px) saturate(1.6);box-shadow:0 30px 60px -30px rgba(159,102,255,.45),inset 0 1px 0 rgba(255,255,255,.9);overflow:hidden}
+.ms-ca-chat::before{content:"";position:absolute;top:-70px;right:-70px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(159,102,255,.25),transparent 65%);pointer-events:none}
+.ms-ca-chat-head{display:flex;align-items:center;gap:6px;padding-bottom:12px;border-bottom:1px solid rgba(159,102,255,.16)}
+.ms-ca-chat-title{margin-left:8px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8b86a3}
+.ms-ca-live{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:#0d9e63}
+.ms-ca-live i{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.18)}
+.ms-ca-chat-log{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:14px 4px}
+.ms-ca-msg{max-width:85%;padding:10px 14px;border-radius:16px;font-size:13.5px;line-height:1.55}
+.ms-ca-msg-ai{align-self:flex-start;background:#fff;border:1px solid #ece6f6;border-top-left-radius:6px;color:#171f2b;box-shadow:0 8px 20px -14px rgba(64,45,110,.35)}
+.ms-ca-msg-user{align-self:flex-end;background:linear-gradient(115deg,#9F66FF,#FF196E);border-top-right-radius:6px;color:#fff;box-shadow:0 10px 22px -12px rgba(255,25,110,.5)}
+.ms-ca-caret{display:inline-block;width:8px;height:15px;margin-left:3px;vertical-align:-2px;background:#9F66FF;animation:ms-cai-blink 1s steps(1) infinite}
+@keyframes ms-cai-blink{50%{opacity:0}}
+.ms-ca-chat-suggest{display:flex;flex-wrap:wrap;gap:8px;padding:10px 0 12px}
+.ms-ca-chat-suggest button{padding:7px 12px;border-radius:999px;border:1px solid #e7e0f3;background:#fff;color:#5b6675;font-family:inherit;font-size:12px;cursor:pointer;transition:color .2s ease,border-color .2s ease,transform .2s ease}
+.ms-ca-chat-suggest button:hover{color:#7c3aed;border-color:rgba(159,102,255,.5);transform:translateY(-1px)}
+.ms-ca-chat-form{display:flex;gap:10px}
+.ms-ca-chat-input{flex:1;min-width:0;padding:12px 16px;border-radius:999px;border:1px solid #e7e0f3;background:#fff;color:#171f2b;font-family:inherit;font-size:13.5px;outline:none;transition:border-color .2s ease,box-shadow .2s ease}
+.ms-ca-chat-input:focus{border-color:#9F66FF;box-shadow:0 0 0 3px rgba(159,102,255,.18)}
+.ms-ca-chat-send{flex:0 0 42px;width:42px;height:42px;border:none;border-radius:50%;color:#fff;background:linear-gradient(115deg,#9F66FF,#FF196E);display:grid;place-items:center;cursor:pointer;transition:transform .2s ease,opacity .2s ease}
+.ms-ca-chat-send svg{width:18px;height:18px}
+.ms-ca-chat-send:hover{transform:translateY(-1px)}
+.ms-ca-chat-send:disabled{opacity:.45;cursor:default}
+/* Feature / agent cards */
+.ms-ca-grid{display:grid;gap:16px}
+@media (min-width:700px){.ms-ca-grid{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1100px){.ms-ca-grid{grid-template-columns:repeat(3,1fr)}}
+.ms-ca-card{position:relative;overflow:hidden;display:flex;gap:14px;align-items:flex-start;padding:20px;border-radius:18px;border:1px solid #ece6f6;background:#fff;box-shadow:0 22px 44px -32px rgba(159,102,255,.4);transition:border-color .25s ease,transform .25s ease,box-shadow .25s ease}
+.ms-ca-card::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(120deg,rgba(159,102,255,.045) 0 1px,transparent 1px 13px);opacity:.55;pointer-events:none}
+.ms-ca-card:hover{border-color:rgba(159,102,255,.55);transform:translateY(-3px);box-shadow:0 26px 50px -30px rgba(159,102,255,.55)}
+.ms-ca-card-body{min-width:0;flex:1}
+.ms-ca-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.ms-ca-card-title{margin:0;font-size:15.5px;font-weight:700;color:#171f2b}
+.ms-ca-tag{flex:0 0 auto;padding:3px 9px;border-radius:999px;border:1px solid rgba(15,158,194,.3);background:rgba(27,176,206,.1);color:#0f9ec2;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.ms-ca-card-text{margin:7px 0 0;font-size:13.5px;line-height:1.6;color:#5b6675}
+
+/* Core experiences (alternating rows) */
+.ms-ca-exp{display:grid;gap:32px;align-items:center;padding:34px 0}
+@media (min-width:1025px){.ms-ca-exp{grid-template-columns:1fr 1fr}.ms-ca-exp.is-rev .ms-ca-exp-copy{order:2}}
+.ms-ca-exp-visual{position:relative;min-height:260px;display:grid;place-items:center;border-radius:22px;border:1px solid rgba(159,102,255,.3);background:radial-gradient(circle at 50% 40%,rgba(159,102,255,.15),transparent 65%),linear-gradient(165deg,#fdfcff,#f7f4fd);overflow:hidden}
+.ms-ca-float{display:inline-flex;align-items:center;gap:12px;padding:14px 22px;border-radius:18px;background:#fff;border:1px solid #ece6f6;box-shadow:0 24px 50px -24px rgba(159,102,255,.5);animation:ms-cai-float 4s ease-in-out infinite}
+.ms-ca-float .ms-cai-icon{width:30px;height:30px}
+.ms-ca-float span{font-size:16px;font-weight:600;color:#171f2b}
+@keyframes ms-cai-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* Extensions grid */
+.ms-ca-ext{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
+@media (min-width:700px){.ms-ca-ext{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:1025px){.ms-ca-ext{grid-template-columns:repeat(4,1fr)}}
+.ms-ca-ext-item{display:flex;flex-direction:column;align-items:center;gap:10px;padding:22px 14px;border-radius:16px;border:1px solid #ece6f6;background:#fff;text-align:center;box-shadow:0 18px 36px -28px rgba(159,102,255,.4);transition:border-color .25s ease,transform .25s ease}
+.ms-ca-ext-item:hover{border-color:rgba(159,102,255,.5);transform:translateY(-3px)}
+.ms-ca-ext-item strong{font-size:14px;color:#171f2b}
+.ms-ca-ext-item span{font-size:12px;line-height:1.45;color:#5b6675}
+
+/* Cloud advantages */
+.ms-ca-adv{display:grid;gap:16px}
+@media (min-width:1025px){.ms-ca-adv{grid-template-columns:repeat(3,1fr)}}
+.ms-ca-adv-item{padding:26px 24px;border-radius:18px;border:1px solid #ece6f6;background:#fff;box-shadow:0 22px 44px -32px rgba(159,102,255,.4);transition:border-color .25s ease,transform .25s ease}
+.ms-ca-adv-item:hover{border-color:rgba(159,102,255,.5);transform:translateY(-3px)}
+.ms-ca-adv-item .ms-cai-h3{font-size:18px;margin-top:16px}
+.ms-ca-adv-item p{margin:10px 0 0;font-size:13.5px;line-height:1.65;color:#5b6675}
+
+/* CTA band (both pages) */
+.ms-cai-cta{position:relative;overflow:hidden;padding:56px 32px;border-radius:24px;border:1px solid rgba(159,102,255,.3);background:linear-gradient(120deg,rgba(159,102,255,.13),rgba(255,25,110,.1));text-align:center}
+.ms-cai-cta::before{content:"";position:absolute;top:-60px;left:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(159,102,255,.28),transparent 65%);pointer-events:none}
+.ms-cai-cta h2{position:relative;margin:0;font-size:clamp(26px,3.4vw,38px);font-weight:700;letter-spacing:-1px;color:#171f2b}
+.ms-cai-cta p{position:relative;margin:14px auto 0;max-width:560px;color:#5b6675;font-size:16px;line-height:1.65}
+.ms-cai-cta .ms-cai-actions{position:relative;margin-top:28px}
+/* ===================== Agentic AI page ===================== */
+.ms-ag-hero{max-width:860px;margin:0 auto;padding:64px 20px 36px;text-align:center}
+.ms-ag-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;border:1px solid rgba(159,102,255,.35);background:rgba(159,102,255,.1);color:#7c3aed;font-size:13px;font-weight:700}
+.ms-ag-badge svg{width:16px;height:16px}
+
+/* Adoption journey */
+.ms-ag-journey{display:grid;gap:36px;align-items:start}
+@media (min-width:1100px){.ms-ag-journey{grid-template-columns:minmax(0,2fr) minmax(0,3fr)}}
+.ms-ag-rail{position:relative;padding-left:26px}
+@media (min-width:1100px){.ms-ag-rail{position:sticky;top:120px}}
+.ms-ag-rail-track{position:absolute;left:0;top:10px;bottom:10px;width:2px;border-radius:2px;background:#eee7f8}
+.ms-ag-rail-fill{position:absolute;left:0;top:10px;width:2px;border-radius:2px;background:linear-gradient(180deg,#9F66FF,#FF196E);transition:height .5s ease}
+.ms-ag-rail-btn{display:flex;align-items:center;gap:12px;width:100%;padding:11px 14px;border:none;border-radius:12px;background:transparent;text-align:left;font-family:inherit;font-size:14px;font-weight:600;color:#5b6675;cursor:pointer;transition:background .3s ease,color .3s ease}
+.ms-ag-rail-btn:hover{background:rgba(159,102,255,.08);color:#171f2b}
+.ms-ag-rail-btn.is-active{background:rgba(159,102,255,.12);color:#171f2b}
+.ms-ag-rail-num{font-size:12px;font-weight:800;color:#8b86a3;font-variant-numeric:tabular-nums;transition:color .3s ease}
+.ms-ag-rail-btn.is-active .ms-ag-rail-num{color:#7c3aed}
+.ms-ag-status{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;font-size:12.5px;color:#8b86a3}
+.ms-ag-status-dot{display:inline-block;width:7px;height:7px;margin-right:7px;border-radius:50%;background:#9F66FF;animation:ms-ag-pulse 1.6s ease-in-out infinite}
+@keyframes ms-ag-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.ms-ag-counter{font-weight:700;color:#171f2b;font-variant-numeric:tabular-nums}
+.ms-ag-cards{position:relative;min-height:340px}
+.ms-ag-card{position:relative;overflow:hidden;padding:38px 32px 34px;border-radius:20px;border:1px solid rgba(159,102,255,.4);background:#fff;box-shadow:0 0 44px rgba(159,102,255,.16),0 30px 60px -40px rgba(159,102,255,.5)}
+.ms-ag-card[hidden]{display:none}
+.ms-ag-card.is-active{animation:ms-ag-in .45s ease}
+@keyframes ms-ag-in{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.ms-ag-card-progress{position:absolute;top:0;left:0;right:0;height:4px;background:#f1ebfa}
+.ms-ag-card-progress i{display:block;height:100%;transform-origin:left;transform:scaleX(0);background:linear-gradient(90deg,#9F66FF,#22d3a7)}
+.ms-ag-card.is-active .ms-ag-card-progress i{animation:ms-ag-progress 5s linear forwards}
+@keyframes ms-ag-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.ms-ag-card-head{display:flex;align-items:center;gap:16px}
+.ms-ag-card-num{font-size:12px;font-weight:800;letter-spacing:.14em;color:#7c3aed}
+.ms-ag-card-title{margin:4px 0 0;font-size:22px;font-weight:700;letter-spacing:-.5px;color:#171f2b}
+.ms-ag-card-text{margin:16px 0 0;font-size:14.5px;line-height:1.7;color:#5b6675}
+.ms-ag-hintbox{display:flex;align-items:center;gap:14px;margin-top:26px;padding:16px 20px;border-radius:14px;border:1px solid #ece6f6;background:#fff}
+.ms-ag-hintbox svg{width:30px;height:30px;flex:0 0 30px;color:#7c3aed}
+.ms-ag-hintbox p{margin:0;font-size:13.5px;line-height:1.55;color:#5b6675}
+.ms-ag-hintbox strong{color:#171f2b}
+
+/* Agents grid + how-it-works steps */
+.ms-ag-steps-num{display:block;font-size:30px;font-weight:800;letter-spacing:-1px;background-image:linear-gradient(115deg,#9F66FF,#FF196E);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.ms-vb-root-page{width:100%;max-width:100%}
+/* inline-head.css loads AFTER this file and caps .ms-vb-root at 680px
+   (equal specificity, later source order wins). Two classes give this
+   rule higher specificity so the page canvas fills its frame instead. */
+.ms-vb-root.ms-vb-root-page{width:100%;max-width:100%}
+.ms-ag-canvas-frame{padding:16px;border-radius:24px;border:1px solid #ece6f6;background:linear-gradient(165deg,#fdfcff,#f7f4fd);box-shadow:0 30px 60px -40px rgba(159,102,255,.5)}
+
+/* ===================== Agentic SDLC page ===================== */
+.ms-sdlc-duo{display:grid;gap:16px}
+@media (min-width:768px){.ms-sdlc-duo{grid-template-columns:1fr 1fr}}
+.ms-sdlc-fig+.ms-sdlc-fig,.ms-sdlc-fig+.ms-sdlc-duo,.ms-sdlc-fig+.ms-sdlc-steps{margin-top:24px}
+.ms-sdlc-fig{margin:0;padding:26px 24px;border-radius:20px;border:1px solid #ece6f6;background:#fff;box-shadow:0 22px 44px -32px rgba(159,102,255,.4)}
+.ms-sdlc-fig-title{margin:0 0 16px;font-size:17px;font-weight:700;letter-spacing:-.3px;color:#171f2b}
+.ms-sdlc-fig img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid #f1ebfa;background:rgba(159,102,255,.05)}
+.ms-sdlc-panel{padding:26px 24px;border-radius:18px;border:1px solid #ece6f6;background:#fff;box-shadow:0 22px 44px -32px rgba(159,102,255,.4)}
+.ms-sdlc-panel .ms-cai-h3{margin:0;font-size:18px}
+.ms-sdlc-panel p{margin:12px 0 0;font-size:14px;line-height:1.7;color:#5b6675}
+.ms-sdlc-table-wrap{overflow-x:auto;border-radius:18px;border:1px solid #ece6f6;background:#fff;box-shadow:0 22px 44px -32px rgba(159,102,255,.4)}
+.ms-sdlc-table{width:100%;min-width:640px;border-collapse:collapse;text-align:left;font-size:14px}
+.ms-sdlc-table th{padding:16px 20px;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8b86a3;border-bottom:1px solid #ece6f6}
+.ms-sdlc-table th.is-agentic{color:#7c3aed}
+.ms-sdlc-table td{padding:15px 20px;vertical-align:top;line-height:1.6;color:#5b6675;border-bottom:1px solid #f1ebfa}
+.ms-sdlc-table tbody tr:last-child td{border-bottom:none}
+.ms-sdlc-table td:first-child{font-weight:700;color:#171f2b;white-space:nowrap}
+.ms-sdlc-ok{display:inline-flex;align-items:flex-start;gap:8px}
+.ms-sdlc-ok svg{width:16px;height:16px;flex:0 0 16px;margin-top:3px;color:#7c3aed}
+.ms-sdlc-pillars{display:grid;gap:16px;grid-template-columns:1fr}
+@media (min-width:700px){.ms-sdlc-pillars{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1100px){.ms-sdlc-pillars{grid-template-columns:repeat(4,1fr)}}
+.ms-sdlc-pillar{display:flex;flex-direction:column;gap:12px;padding:26px 24px;border-radius:18px;border:1px solid rgba(159,102,255,.35);background:linear-gradient(165deg,#fdfcff,#f7f4fd);box-shadow:0 22px 44px -32px rgba(159,102,255,.4);transition:border-color .25s ease,transform .25s ease}
+.ms-sdlc-pillar:hover{border-color:#9F66FF;transform:translateY(-3px)}
+.ms-sdlc-pillar-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ms-sdlc-pillar .ms-ag-steps-num{font-size:26px}
+.ms-sdlc-pillar .ms-cai-h3{margin:0;font-size:16.5px}
+.ms-sdlc-pillar p{margin:0;font-size:13.5px;line-height:1.65;color:#5b6675}
+.ms-sdlc-steps{display:grid;gap:16px}
+@media (min-width:700px){.ms-sdlc-steps{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1100px){.ms-sdlc-steps{grid-template-columns:repeat(3,1fr)}}
+.ms-sdlc-step{padding:24px;border-radius:18px;border:1px solid #ece6f6;background:#fff;box-shadow:0 18px 36px -28px rgba(159,102,255,.4)}
+.ms-sdlc-step .ms-ag-steps-num{font-size:34px}
+.ms-sdlc-step h3{margin:8px 0 0;font-size:17px;font-weight:700;letter-spacing:-.3px;color:#171f2b}
+.ms-sdlc-step p{margin:10px 0 0;font-size:13.5px;line-height:1.65;color:#5b6675}
+.ms-sdlc-footnote{max-width:640px;margin:26px auto 0;font-size:12.5px;line-height:1.6;color:#8b86a3}
+.ms-sdlc-feat{display:flex;flex-direction:column;gap:14px;padding:26px 24px;border-radius:18px;border:1px solid #ece6f6;background:#fff;box-shadow:0 18px 36px -28px rgba(159,102,255,.4);transition:border-color .25s ease,transform .25s ease}
+.ms-sdlc-feat:hover{border-color:rgba(159,102,255,.5);transform:translateY(-3px)}
+.ms-sdlc-feat .ms-cai-h3{margin:0;font-size:17.5px}
+.ms-sdlc-feat p{margin:0;font-size:14px;line-height:1.7;color:#5b6675}
+.ms-sdlc-note{max-width:640px;margin:32px auto 0;text-align:center;font-size:12.5px;line-height:1.7;color:#8b86a3}
+
+/* ===================== Motion & responsive ===================== */
+@media (prefers-reduced-motion:reduce){
+  .ms-ca-float,.ms-ca-caret,.ms-ag-status-dot{animation:none}
+  .ms-ca-caret{display:none}
+  .ms-ag-card.is-active{animation:none}
+  .ms-ag-card.is-active .ms-ag-card-progress i{animation:none;transform:scaleX(1)}
+  .ms-cai-btn,.ms-ca-card,.ms-ca-ext-item,.ms-ca-adv-item{transition:none}
+}
+@media (max-width:700px){
+  .ms-cai-section{padding:44px 16px}
+  .ms-ca-chat{height:430px}
+  .ms-ag-card{padding:30px 22px 28px}
+}
+
